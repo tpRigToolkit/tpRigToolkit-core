@@ -1,0 +1,6 @@
+-e git+https://github.com/wonderworks-software/PyFlow.git@release#egg=PyFlow
+tpPyUtils
+tpDccLib
+tpQtLib
+tpMayaLib
+tpNameIt
