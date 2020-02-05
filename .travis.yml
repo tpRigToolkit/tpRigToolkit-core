@@ -7,7 +7,7 @@ install:
 script:
 - find . -name \*.py -exec pycodestyle --max-line-length=120 --ignore=E402 {} +
 - pytest --cov=tpRigToolkit
-- sphinx-apidoc -f -e -o docs/sphinx tprigtoolkit
+- sphinx-apidoc -f -e -o docs/sphinx tpRigToolkit
 - sphinx-build -M html ./docs/sphinx ./
 after_success:
 - coveralls
