@@ -1,0 +1,7 @@
+tpRigToolkit.register module
+============================
+
+.. automodule:: tpRigToolkit.register
+   :members:
+   :undoc-members:
+   :show-inheritance:

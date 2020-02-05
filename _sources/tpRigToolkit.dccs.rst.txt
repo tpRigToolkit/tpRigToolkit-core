@@ -1,0 +1,10 @@
+tpRigToolkit.dccs package
+=========================
+
+Module contents
+---------------
+
+.. automodule:: tpRigToolkit.dccs
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,7 @@
+tpRigToolkit.loader module
+==========================
+
+.. automodule:: tpRigToolkit.loader
+   :members:
+   :undoc-members:
+   :show-inheritance:
