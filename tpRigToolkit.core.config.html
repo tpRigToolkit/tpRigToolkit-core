@@ -176,8 +176,80 @@
 
            <div itemprop="articleBody">
             
-  <div class="section" id="tprigtoolkit-core-config-module">
-<h1>tpRigToolkit.core.config module<a class="headerlink" href="#tprigtoolkit-core-config-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-tpRigToolkit.core.config">
+<span id="tprigtoolkit-core-config-module"></span><h1>tpRigToolkit.core.config module<a class="headerlink" href="#module-tpRigToolkit.core.config" title="Permalink to this headline">¶</a></h1>
+<p>Module that contains default implementation for tpRigToolkit configurations</p>
+<dl class="class">
+<dt id="tpRigToolkit.core.config.YAMLConfiguration">
+<em class="property">class </em><code class="sig-prename descclassname">tpRigToolkit.core.config.</code><code class="sig-name descname">YAMLConfiguration</code><span class="sig-paren">(</span><em class="sig-param">config_name</em>, <em class="sig-param">environment</em>, <em class="sig-param">config_dict=None</em>, <em class="sig-param">parser_class=&lt;class 'tpRigToolkit.core.config.YAMLConfigurationParser'&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.config.YAMLConfiguration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="tpRigToolkit.core.config.YAMLConfiguration.data">
+<em class="property">property </em><code class="sig-name descname">data</code><a class="headerlink" href="#tpRigToolkit.core.config.YAMLConfiguration.data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tpRigToolkit.core.config.YAMLConfiguration.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">attr_section</em>, <em class="sig-param">attr_name=None</em>, <em class="sig-param">default=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.config.YAMLConfiguration.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an attribute of the configuration
+:param attr_name: str
+:param attr_section: str
+:param default: object
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tpRigToolkit.core.config.YAMLConfiguration.get_path">
+<code class="sig-name descname">get_path</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.config.YAMLConfiguration.get_path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tpRigToolkit.core.config.YAMLConfiguration.load">
+<code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param">config_name</em>, <em class="sig-param">config_dict=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.config.YAMLConfiguration.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function that reads configuration file and initializes project variables properly
+This function can be extended in new projects</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tpRigToolkit.core.config.YAMLConfigurationAttribute">
+<em class="property">class </em><code class="sig-prename descclassname">tpRigToolkit.core.config.</code><code class="sig-name descname">YAMLConfigurationAttribute</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.config.YAMLConfigurationAttribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class that allows access nested dictionaries using Python attribute access
+<a class="reference external" href="https://stackoverflow.com/questions/38034377/object-like-attribute-access-for-nested-dictionary">https://stackoverflow.com/questions/38034377/object-like-attribute-access-for-nested-dictionary</a></p>
+<dl class="method">
+<dt id="tpRigToolkit.core.config.YAMLConfigurationAttribute.from_nested_dict">
+<em class="property">static </em><code class="sig-name descname">from_nested_dict</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.config.YAMLConfigurationAttribute.from_nested_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construst a nested YAMLConfigurationAttribute from nested dictionaries
+:param data: dict
+:return: YAMLConfigurationAttribute</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tpRigToolkit.core.config.YAMLConfigurationParser">
+<em class="property">class </em><code class="sig-prename descclassname">tpRigToolkit.core.config.</code><code class="sig-name descname">YAMLConfigurationParser</code><span class="sig-paren">(</span><em class="sig-param">config_data</em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.config.YAMLConfigurationParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="tpRigToolkit.core.config.YAMLConfigurationParser.parse">
+<code class="sig-name descname">parse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.config.YAMLConfigurationParser.parse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="tpRigToolkit.core.config.get_config">
+<code class="sig-prename descclassname">tpRigToolkit.core.config.</code><code class="sig-name descname">get_config</code><span class="sig-paren">(</span><em class="sig-param">config_name</em>, <em class="sig-param">config_dict=None</em>, <em class="sig-param">parser_class=&lt;class 'tpRigToolkit.core.config.YAMLConfigurationParser'&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.config.get_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a configuration with the given arguments
+:param config_name: str
+:param config_dict: dict
+:param parser_class: YAMLConfigurationParser
+:param environment: str (optional)
+:return: YAMLConfiguration</p>
+</dd></dl>
+
 </div>
 
 
