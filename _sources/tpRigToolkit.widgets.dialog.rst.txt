@@ -1,0 +1,7 @@
+tpRigToolkit.widgets.dialog module
+==================================
+
+.. automodule:: tpRigToolkit.widgets.dialog
+   :members:
+   :undoc-members:
+   :show-inheritance:

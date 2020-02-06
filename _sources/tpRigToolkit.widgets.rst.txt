@@ -1,6 +1,14 @@
 tpRigToolkit.widgets package
 ============================
 
+Submodules
+----------
+
+.. toctree::
+
+   tpRigToolkit.widgets.dialog
+   tpRigToolkit.widgets.window
+
 Module contents
 ---------------
 
