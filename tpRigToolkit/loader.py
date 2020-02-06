@@ -69,19 +69,19 @@ def init(do_reload=False, dev=False):
 
     create_logger_directory()
 
-    from artellapipe.utils import resource
+    from tpRigToolkit.core import resource
     resources_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'resources')
     resource.ResourceManager().register_resource(resources_path)
 
 
 def create_logger_directory():
     """
-    Creates artellapipe logger directory
+    Creates tpRigToolkit logger directory
     """
 
-    artellapipe_logger_dir = os.path.normpath(os.path.join(os.path.expanduser('~'), 'tpRigToolkit', 'logs'))
-    if not os.path.isdir(artellapipe_logger_dir):
-        os.makedirs(artellapipe_logger_dir)
+    logger_dir = os.path.normpath(os.path.join(os.path.expanduser('~'), 'tpRigToolkit', 'logs'))
+    if not os.path.isdir(logger_dir):
+        os.makedirs(logger_dir)
 
 
 def get_logging_config():
