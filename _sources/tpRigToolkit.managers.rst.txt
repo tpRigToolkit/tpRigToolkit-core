@@ -1,0 +1,17 @@
+tpRigToolkit.managers package
+=============================
+
+Submodules
+----------
+
+.. toctree::
+
+   tpRigToolkit.managers.tools
+
+Module contents
+---------------
+
+.. automodule:: tpRigToolkit.managers
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,6 +1,15 @@
 tpRigToolkit.core package
 =========================
 
+Submodules
+----------
+
+.. toctree::
+
+   tpRigToolkit.core.config
+   tpRigToolkit.core.resource
+   tpRigToolkit.core.tool
+
 Module contents
 ---------------
 

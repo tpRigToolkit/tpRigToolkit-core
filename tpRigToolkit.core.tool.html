@@ -1,0 +1,348 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>tpRigToolkit.core.tool module &mdash; tpRigToolkit 0.0.l documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="tpRigToolkit.dccs package" href="tpRigToolkit.dccs.html" />
+    <link rel="prev" title="tpRigToolkit.core.resource module" href="tpRigToolkit.core.resource.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> tpRigToolkit
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">tpRigToolkit</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="tpRigToolkit.html">tpRigToolkit package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="tpRigToolkit.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="tpRigToolkit.config.html">tpRigToolkit.config package</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="tpRigToolkit.core.html">tpRigToolkit.core package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tpRigToolkit.dccs.html">tpRigToolkit.dccs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tpRigToolkit.libs.html">tpRigToolkit.libs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tpRigToolkit.managers.html">tpRigToolkit.managers package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tpRigToolkit.tools.html">tpRigToolkit.tools package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tpRigToolkit.utils.html">tpRigToolkit.utils package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tpRigToolkit.widgets.html">tpRigToolkit.widgets package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tpRigToolkit.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tpRigToolkit.html#module-tpRigToolkit">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">tpRigToolkit</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">tpRigToolkit</a> &raquo;</li>
+        
+          <li><a href="tpRigToolkit.html">tpRigToolkit package</a> &raquo;</li>
+        
+          <li><a href="tpRigToolkit.core.html">tpRigToolkit.core package</a> &raquo;</li>
+        
+      <li>tpRigToolkit.core.tool module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/tpRigToolkit.core.tool.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-tpRigToolkit.core.tool">
+<span id="tprigtoolkit-core-tool-module"></span><h1>tpRigToolkit.core.tool module<a class="headerlink" href="#module-tpRigToolkit.core.tool" title="Permalink to this headline">¶</a></h1>
+<p>Module that contains core classes for tools</p>
+<dl class="class">
+<dt id="tpRigToolkit.core.tool.Tool">
+<em class="property">class </em><code class="sig-prename descclassname">tpRigToolkit.core.tool.</code><code class="sig-name descname">Tool</code><span class="sig-paren">(</span><em class="sig-param">config</em>, <em class="sig-param">parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.tool.Tool" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tpQtLib.core.base.BaseWidget</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="tpRigToolkit.core.tool.Tool.ATTACHER_TYPE">
+<code class="sig-name descname">ATTACHER_TYPE</code><em class="property"> = 0</em><a class="headerlink" href="#tpRigToolkit.core.tool.Tool.ATTACHER_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tpRigToolkit.core.tool.Tool.close_tool">
+<code class="sig-name descname">close_tool</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.tool.Tool.close_tool" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close tool</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tpRigToolkit.core.tool.Tool.close_tool_attacher">
+<code class="sig-name descname">close_tool_attacher</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.tool.Tool.close_tool_attacher" title="Permalink to this definition">¶</a></dt>
+<dd><p>Closes tool attacher and the tool itself</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tpRigToolkit.core.tool.Tool.config">
+<em class="property">property </em><code class="sig-name descname">config</code><a class="headerlink" href="#tpRigToolkit.core.tool.Tool.config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tpRigToolkit.core.tool.Tool.post_attacher_set">
+<code class="sig-name descname">post_attacher_set</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.tool.Tool.post_attacher_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function that is called once an attacher has been set
+Override in child classes</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tpRigToolkit.core.tool.Tool.register_callback">
+<code class="sig-name descname">register_callback</code><span class="sig-paren">(</span><em class="sig-param">callback_type</em>, <em class="sig-param">fn</em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.tool.Tool.register_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registers the given callback with the given function
+:param callback_type: tpDccLib.DccCallbacks
+:param fn: Python function to be called when callback is emitted</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tpRigToolkit.core.tool.Tool.save_settings">
+<code class="sig-name descname">save_settings</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.tool.Tool.save_settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save settings of the attacher</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tpRigToolkit.core.tool.Tool.set_attacher">
+<code class="sig-name descname">set_attacher</code><span class="sig-paren">(</span><em class="sig-param">attacher</em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.tool.Tool.set_attacher" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the attacher this tool will be linked to
+:param attacher:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tpRigToolkit.core.tool.Tool.settings">
+<code class="sig-name descname">settings</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.tool.Tool.settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns settings of the attacher
+:return: QtSettings</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tpRigToolkit.core.tool.Tool.show_error_message">
+<code class="sig-name descname">show_error_message</code><span class="sig-paren">(</span><em class="sig-param">msg</em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.tool.Tool.show_error_message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shows an error message in the attacher
+:param msg: str</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tpRigToolkit.core.tool.Tool.show_ok_message">
+<code class="sig-name descname">show_ok_message</code><span class="sig-paren">(</span><em class="sig-param">msg</em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.tool.Tool.show_ok_message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shows an ok message in the attacher
+:param msg: str</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tpRigToolkit.core.tool.Tool.show_warning_message">
+<code class="sig-name descname">show_warning_message</code><span class="sig-paren">(</span><em class="sig-param">msg</em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.tool.Tool.show_warning_message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shows a warning message in the attacher
+:param msg: str</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tpRigToolkit.core.tool.Tool.staticMetaObject">
+<code class="sig-name descname">staticMetaObject</code><em class="property"> = &lt;PySide2.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#tpRigToolkit.core.tool.Tool.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tpRigToolkit.core.tool.Tool.unregister_callbacks">
+<code class="sig-name descname">unregister_callbacks</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.tool.Tool.unregister_callbacks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unregisters all callbacks registered by this tool</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tpRigToolkit.core.tool.ToolAttacher">
+<em class="property">class </em><code class="sig-prename descclassname">tpRigToolkit.core.tool.</code><code class="sig-name descname">ToolAttacher</code><a class="headerlink" href="#tpRigToolkit.core.tool.ToolAttacher" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="tpRigToolkit.core.tool.ToolAttacher.Dialog">
+<code class="sig-name descname">Dialog</code><em class="property"> = 1</em><a class="headerlink" href="#tpRigToolkit.core.tool.ToolAttacher.Dialog" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tpRigToolkit.core.tool.ToolAttacher.Window">
+<code class="sig-name descname">Window</code><em class="property"> = 0</em><a class="headerlink" href="#tpRigToolkit.core.tool.ToolAttacher.Window" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+    <a href="https://github.com/tpRigToolkit/tpRigToolkit-core" target="_blank">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+    </a>
+
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tpRigToolkit.dccs.html" class="btn btn-neutral float-right" title="tpRigToolkit.dccs package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="tpRigToolkit.core.resource.html" class="btn btn-neutral float-left" title="tpRigToolkit.core.resource module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Tomas Poveda
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

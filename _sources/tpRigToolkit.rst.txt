@@ -10,6 +10,7 @@ Subpackages
    tpRigToolkit.core
    tpRigToolkit.dccs
    tpRigToolkit.libs
+   tpRigToolkit.managers
    tpRigToolkit.tools
    tpRigToolkit.utils
    tpRigToolkit.widgets
