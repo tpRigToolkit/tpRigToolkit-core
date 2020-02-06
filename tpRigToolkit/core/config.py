@@ -56,7 +56,7 @@ class YAMLConfigurationParser(object):
 
     def parse(self):
         self._parsed_data = self._config_data
-        return YAMLConfigurationParser.from_nested_dict(self._parsed_data)
+        return YAMLConfigurationAttribute.from_nested_dict(self._parsed_data)
 
 
 class YAMLConfiguration(object):

@@ -262,8 +262,6 @@ class ToolsManager(object):
         :param str tool_path: name or path of the tool (tpRigToolkit.tools.rignode or rignode)
         """
 
-        from tpRigToolkit.widgets import dialog
-
         tool_to_run = None
 
         if extra_args is None:
@@ -295,10 +293,11 @@ class ToolsManager(object):
         tool_fullname = self._tools[tool_to_run]['loader'].fullname
         tool_version = self._tools[tool_to_run]['version']
 
-        sentry_id = tool_config.data.get('sentry_id', None)
-        if sentry_id and not debug:
-            import sentry_sdk
-            sentry_sdk.init(sentry_id, release=tool_version)
+        # This is not working in Maya 2020
+        # sentry_id = tool_config.data.get('sentry_id', None)
+        # if sentry_id and not debug:
+        #     import sentry_sdk
+        #     sentry_sdk.init(sentry_id, release=tool_version)
 
         # Initialize and reload tool modules if necessary
         tool_importer = ToolImporter(pkg_loader, debug=debug)
@@ -348,7 +347,6 @@ class ToolsManager(object):
                 tool_win.setWindowTitle('{} - {}'.format(tool_name, tool_version))
                 tool_win._dragger._button_closed.clicked.disconnect()
                 tool_win._dragger._button_closed.clicked.connect(tool_widget.close_tool_attacher)
-                tool_win.add_logo(resource.ResourceManager().pixmap(tool_logo), 910, 0)
                 tool_icon = tool_config.data.get('icon', None)
                 if tool_icon:
                     tool_win.setWindowIcon(resource.ResourceManager().icon(tool_icon))
@@ -360,7 +358,6 @@ class ToolsManager(object):
                 tool_dlg = tpRigToolkit.Dialog(tool=tool_widget)
                 tool_dlg.setObjectName('{}_Dialog'.format(tool_name))
                 tool_dlg.setWindowTitle('{} - {}'.format(tool_name, tool_version))
-                tool_dlg.add_logo(resource.ResourceManager().pixmap(tool_logo), 910, 0)
                 tool_icon = tool_config.data.get('icon', None)
                 if tool_icon:
                     tool_dlg.setWindowIcon(resource.ResourceManager().icon(tool_icon))
