@@ -11,6 +11,7 @@ Subpackages
    tpRigToolkit.dccs
    tpRigToolkit.libs
    tpRigToolkit.managers
+   tpRigToolkit.packages
    tpRigToolkit.tools
    tpRigToolkit.utils
    tpRigToolkit.widgets

@@ -1,0 +1,10 @@
+tpRigToolkit.packages package
+=============================
+
+Module contents
+---------------
+
+.. automodule:: tpRigToolkit.packages
+   :members:
+   :undoc-members:
+   :show-inheritance:
