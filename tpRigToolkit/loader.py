@@ -17,7 +17,6 @@ import inspect
 import logging.config
 from collections import OrderedDict
 
-import tpDccLib as tp
 from tpPyUtils import python
 
 
@@ -81,6 +80,12 @@ def init(do_reload=False, import_libs=True, dev=False):
         only_packages=False)
     if do_reload:
         rigtoolkit_importer.reload_all()
+        modules_to_remove = list()
+        for m in os.sys.modules.keys():
+            if 'PyFlow' in m and 'LoggerTool' not in m:
+                modules_to_remove.append(m)
+        for t in modules_to_remove:
+            os.sys.modules.pop(t)
 
     create_logger_directory()
 
