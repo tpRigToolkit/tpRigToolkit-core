@@ -5,21 +5,22 @@ Subpackages
 -----------
 
 .. toctree::
+   :maxdepth: 4
 
-   tpRigToolkit.config
    tpRigToolkit.core
    tpRigToolkit.dccs
    tpRigToolkit.libs
    tpRigToolkit.managers
    tpRigToolkit.packages
    tpRigToolkit.tools
-   tpRigToolkit.utils
+   tpRigToolkit.toolsets
    tpRigToolkit.widgets
 
 Submodules
 ----------
 
 .. toctree::
+   :maxdepth: 4
 
    tpRigToolkit.loader
    tpRigToolkit.register

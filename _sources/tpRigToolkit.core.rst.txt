@@ -5,9 +5,11 @@ Submodules
 ----------
 
 .. toctree::
+   :maxdepth: 4
 
    tpRigToolkit.core.config
-   tpRigToolkit.core.resource
+   tpRigToolkit.core.factory
+   tpRigToolkit.core.package
    tpRigToolkit.core.tool
 
 Module contents

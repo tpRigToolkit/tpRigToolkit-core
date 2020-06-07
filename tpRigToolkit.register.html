@@ -21,10 +21,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -169,14 +169,23 @@
             
   <div class="section" id="module-tpRigToolkit.register">
 <span id="tprigtoolkit-register-module"></span><h1>tpRigToolkit.register module<a class="headerlink" href="#module-tpRigToolkit.register" title="Permalink to this headline">¶</a></h1>
-<p>Initialization module for tpRigToolkit</p>
-<dl class="function">
+<p>Register module for tpRigToolkit</p>
+<dl class="py function">
+<dt id="tpRigToolkit.register.cleanup">
+<code class="sig-prename descclassname">tpRigToolkit.register.</code><code class="sig-name descname">cleanup</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.register.cleanup" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
 <dt id="tpRigToolkit.register.register_class">
-<code class="sig-prename descclassname">tpRigToolkit.register.</code><code class="sig-name descname">register_class</code><span class="sig-paren">(</span><em class="sig-param">cls_name</em>, <em class="sig-param">cls</em>, <em class="sig-param">is_unique=False</em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.register.register_class" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">tpRigToolkit.register.</code><code class="sig-name descname">register_class</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cls_name</span></em>, <em class="sig-param"><span class="n">cls</span></em>, <em class="sig-param"><span class="n">is_unique</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">skip_store</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.register.register_class" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function registers given class into tpRigToolkit module
 :param cls_name: str, name of the class we want to register
 :param cls: class, class we want to register
-:param is_unique: bool, Whether if the class should be updated if new class is registered with the same name</p>
+:param is_unique: bool, Whether if the class should be updated if new class is registered with the same name
+:param skip_store: bool, Whether the registered class should be removed during cleanup operation</p>
+<blockquote>
+<div><p>Useful in scenarios where we want to cleanup registered class manually.</p>
+</div></blockquote>
 </dd></dl>
 
 </div>

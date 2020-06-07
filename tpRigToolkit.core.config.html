@@ -21,10 +21,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="tpRigToolkit.core.resource module" href="tpRigToolkit.core.resource.html" />
+    <link rel="next" title="tpRigToolkit.core.factory module" href="tpRigToolkit.core.factory.html" />
     <link rel="prev" title="tpRigToolkit.core package" href="tpRigToolkit.core.html" /> 
 </head>
 
@@ -89,14 +89,13 @@
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">tpRigToolkit</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="tpRigToolkit.html">tpRigToolkit package</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="tpRigToolkit.html#subpackages">Subpackages</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="tpRigToolkit.config.html">tpRigToolkit.config package</a></li>
 <li class="toctree-l4 current"><a class="reference internal" href="tpRigToolkit.core.html">tpRigToolkit.core package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tpRigToolkit.dccs.html">tpRigToolkit.dccs package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tpRigToolkit.libs.html">tpRigToolkit.libs package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tpRigToolkit.managers.html">tpRigToolkit.managers package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tpRigToolkit.packages.html">tpRigToolkit.packages package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tpRigToolkit.tools.html">tpRigToolkit.tools package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tpRigToolkit.utils.html">tpRigToolkit.utils package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tpRigToolkit.toolsets.html">tpRigToolkit.toolsets package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tpRigToolkit.widgets.html">tpRigToolkit.widgets package</a></li>
 </ul>
 </li>
@@ -180,18 +179,18 @@
   <div class="section" id="module-tpRigToolkit.core.config">
 <span id="tprigtoolkit-core-config-module"></span><h1>tpRigToolkit.core.config module<a class="headerlink" href="#module-tpRigToolkit.core.config" title="Permalink to this headline">¶</a></h1>
 <p>Module that contains default implementation for tpRigToolkit configurations</p>
-<dl class="class">
+<dl class="py class">
 <dt id="tpRigToolkit.core.config.YAMLConfiguration">
 <em class="property">class </em><code class="sig-prename descclassname">tpRigToolkit.core.config.</code><code class="sig-name descname">YAMLConfiguration</code><span class="sig-paren">(</span><em class="sig-param">config_name</em>, <em class="sig-param">environment</em>, <em class="sig-param">config_dict=None</em>, <em class="sig-param">parser_class=&lt;class 'tpRigToolkit.core.config.YAMLConfigurationParser'&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.config.YAMLConfiguration" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="method">
+<dl class="py method">
 <dt id="tpRigToolkit.core.config.YAMLConfiguration.data">
 <em class="property">property </em><code class="sig-name descname">data</code><a class="headerlink" href="#tpRigToolkit.core.config.YAMLConfiguration.data" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="tpRigToolkit.core.config.YAMLConfiguration.get">
-<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">attr_section</em>, <em class="sig-param">attr_name=None</em>, <em class="sig-param">default=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.config.YAMLConfiguration.get" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">attr_section</span></em>, <em class="sig-param"><span class="n">attr_name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">default</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.config.YAMLConfiguration.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns an attribute of the configuration
 :param attr_name: str
 :param attr_section: str
@@ -199,29 +198,29 @@
 :return:</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="tpRigToolkit.core.config.YAMLConfiguration.get_path">
 <code class="sig-name descname">get_path</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.config.YAMLConfiguration.get_path" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="tpRigToolkit.core.config.YAMLConfiguration.load">
-<code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param">config_name</em>, <em class="sig-param">config_dict=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.config.YAMLConfiguration.load" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config_name</span></em>, <em class="sig-param"><span class="n">config_dict</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.config.YAMLConfiguration.load" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function that reads configuration file and initializes project variables properly
 This function can be extended in new projects</p>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="tpRigToolkit.core.config.YAMLConfigurationAttribute">
-<em class="property">class </em><code class="sig-prename descclassname">tpRigToolkit.core.config.</code><code class="sig-name descname">YAMLConfigurationAttribute</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.config.YAMLConfigurationAttribute" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">tpRigToolkit.core.config.</code><code class="sig-name descname">YAMLConfigurationAttribute</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.config.YAMLConfigurationAttribute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Class that allows access nested dictionaries using Python attribute access
 <a class="reference external" href="https://stackoverflow.com/questions/38034377/object-like-attribute-access-for-nested-dictionary">https://stackoverflow.com/questions/38034377/object-like-attribute-access-for-nested-dictionary</a></p>
-<dl class="method">
+<dl class="py method">
 <dt id="tpRigToolkit.core.config.YAMLConfigurationAttribute.from_nested_dict">
-<em class="property">static </em><code class="sig-name descname">from_nested_dict</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.config.YAMLConfigurationAttribute.from_nested_dict" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">from_nested_dict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.config.YAMLConfigurationAttribute.from_nested_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Construst a nested YAMLConfigurationAttribute from nested dictionaries
 :param data: dict
 :return: YAMLConfigurationAttribute</p>
@@ -229,18 +228,18 @@ This function can be extended in new projects</p>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="tpRigToolkit.core.config.YAMLConfigurationParser">
-<em class="property">class </em><code class="sig-prename descclassname">tpRigToolkit.core.config.</code><code class="sig-name descname">YAMLConfigurationParser</code><span class="sig-paren">(</span><em class="sig-param">config_data</em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.config.YAMLConfigurationParser" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">tpRigToolkit.core.config.</code><code class="sig-name descname">YAMLConfigurationParser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config_data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.config.YAMLConfigurationParser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="method">
+<dl class="py method">
 <dt id="tpRigToolkit.core.config.YAMLConfigurationParser.parse">
 <code class="sig-name descname">parse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.config.YAMLConfigurationParser.parse" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="tpRigToolkit.core.config.get_config">
 <code class="sig-prename descclassname">tpRigToolkit.core.config.</code><code class="sig-name descname">get_config</code><span class="sig-paren">(</span><em class="sig-param">config_name</em>, <em class="sig-param">config_dict=None</em>, <em class="sig-param">parser_class=&lt;class 'tpRigToolkit.core.config.YAMLConfigurationParser'&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.config.get_config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a configuration with the given arguments
@@ -265,7 +264,7 @@ This function can be extended in new projects</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="tpRigToolkit.core.resource.html" class="btn btn-neutral float-right" title="tpRigToolkit.core.resource module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="tpRigToolkit.core.factory.html" class="btn btn-neutral float-right" title="tpRigToolkit.core.factory module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="tpRigToolkit.core.html" class="btn btn-neutral float-left" title="tpRigToolkit.core package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

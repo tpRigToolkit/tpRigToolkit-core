@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>tpRigToolkit.utils package &mdash; tpRigToolkit 0.0.l documentation</title>
+  <title>tpRigToolkit.core.package module &mdash; tpRigToolkit 0.0.l documentation</title>
   
 
   
@@ -21,10 +21,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -35,8 +35,8 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="tpRigToolkit.utils.resource module" href="tpRigToolkit.utils.resource.html" />
-    <link rel="prev" title="tpRigToolkit.tools package" href="tpRigToolkit.tools.html" /> 
+    <link rel="next" title="tpRigToolkit.core.tool module" href="tpRigToolkit.core.tool.html" />
+    <link rel="prev" title="tpRigToolkit.core.factory module" href="tpRigToolkit.core.factory.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -89,14 +89,13 @@
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">tpRigToolkit</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="tpRigToolkit.html">tpRigToolkit package</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="tpRigToolkit.html#subpackages">Subpackages</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="tpRigToolkit.config.html">tpRigToolkit.config package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tpRigToolkit.core.html">tpRigToolkit.core package</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="tpRigToolkit.core.html">tpRigToolkit.core package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tpRigToolkit.dccs.html">tpRigToolkit.dccs package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tpRigToolkit.libs.html">tpRigToolkit.libs package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tpRigToolkit.managers.html">tpRigToolkit.managers package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tpRigToolkit.packages.html">tpRigToolkit.packages package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tpRigToolkit.tools.html">tpRigToolkit.tools package</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">tpRigToolkit.utils package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tpRigToolkit.toolsets.html">tpRigToolkit.toolsets package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tpRigToolkit.widgets.html">tpRigToolkit.widgets package</a></li>
 </ul>
 </li>
@@ -155,13 +154,15 @@
         
           <li><a href="tpRigToolkit.html">tpRigToolkit package</a> &raquo;</li>
         
-      <li>tpRigToolkit.utils package</li>
+          <li><a href="tpRigToolkit.core.html">tpRigToolkit.core package</a> &raquo;</li>
+        
+      <li>tpRigToolkit.core.package module</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/tpRigToolkit.utils.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/tpRigToolkit.core.package.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -175,19 +176,8 @@
 
            <div itemprop="articleBody">
             
-  <div class="section" id="tprigtoolkit-utils-package">
-<h1>tpRigToolkit.utils package<a class="headerlink" href="#tprigtoolkit-utils-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="tpRigToolkit.utils.resource.html">tpRigToolkit.utils.resource module</a></li>
-</ul>
-</div>
-</div>
-<div class="section" id="module-tpRigToolkit.utils">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-tpRigToolkit.utils" title="Permalink to this headline">¶</a></h2>
-</div>
+  <div class="section" id="tprigtoolkit-core-package-module">
+<h1>tpRigToolkit.core.package module<a class="headerlink" href="#tprigtoolkit-core-package-module" title="Permalink to this headline">¶</a></h1>
 </div>
 
 
@@ -202,10 +192,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="tpRigToolkit.utils.resource.html" class="btn btn-neutral float-right" title="tpRigToolkit.utils.resource module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="tpRigToolkit.core.tool.html" class="btn btn-neutral float-right" title="tpRigToolkit.core.tool module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="tpRigToolkit.tools.html" class="btn btn-neutral float-left" title="tpRigToolkit.tools package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="tpRigToolkit.core.factory.html" class="btn btn-neutral float-left" title="tpRigToolkit.core.factory module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

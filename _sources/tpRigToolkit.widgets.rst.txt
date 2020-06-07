@@ -5,6 +5,7 @@ Submodules
 ----------
 
 .. toctree::
+   :maxdepth: 4
 
    tpRigToolkit.widgets.dialog
    tpRigToolkit.widgets.window

@@ -1,7 +1,7 @@
-tpRigToolkit.utils.resource module
+tpRigToolkit.managers.names module
 ==================================
 
-.. automodule:: tpRigToolkit.utils.resource
+.. automodule:: tpRigToolkit.managers.names
    :members:
    :undoc-members:
    :show-inheritance:
