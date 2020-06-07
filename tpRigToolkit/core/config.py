@@ -17,7 +17,7 @@ import logging
 
 import metayaml
 
-import tpDccLib as tp
+import tpDcc as tp
 
 LOGGER = logging.getLogger()
 

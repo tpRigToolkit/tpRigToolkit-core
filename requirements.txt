@@ -12,9 +12,9 @@ python-json-logger
 sentry-sdk
 pyyaml
 metayaml
-tpPyUtils
-tpDccLib
-tpQtLib
-tpMayaLib
-tpNameIt
+tpDcc-libs-python
+tpDcc-core
+tpDcc-libs-qt
+tpDcc-dccs-maya
+tpDcc-tools-nameit
 tpRigToolkit-config

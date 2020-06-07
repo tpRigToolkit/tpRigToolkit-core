@@ -1,0 +1,4 @@
+include tpRigToolkit/__logging__.ini
+include tpRigToolkit/toolsets/*.toolset
+include versioneer.py
+include tpRigToolkit/_version.py

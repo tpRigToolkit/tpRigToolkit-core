@@ -12,13 +12,12 @@ __license__ = "MIT"
 __maintainer__ = "Tomas Poveda"
 __email__ = "tpovedatd@gmail.com"
 
-import tpQtLib
+import tpDcc
 
 import tpRigToolkit
-from tpRigToolkit.core import resource
 
 
-class MainDialog(tpQtLib.Dialog, object):
+class MainDialog(tpDcc.Dialog, object):
 
     def __init__(
             self,
@@ -76,7 +75,7 @@ class MainDialog(tpQtLib.Dialog, object):
                     '{} Project Icon not found: {}!'.format(
                         self._project.name.title(), self._project.icon_name + '.png'))
 
-        return resource.ResourceManager().icon('artella')
+        return tpDcc.ResourcesMgr().icon('artella')
 
 
 tpRigToolkit.register.register_class('Dialog', MainDialog)

@@ -13,146 +13,115 @@ __maintainer__ = "Tomas Poveda"
 __email__ = "tpovedatd@gmail.com"
 
 import os
-import inspect
 import logging.config
-from collections import OrderedDict
 
-from tpPyUtils import python
+# =================================================================================
+
+PACKAGE = 'tpRigToolkit'
+
+# =================================================================================
 
 
-def init(do_reload=False, import_libs=True, dev=False):
+def init(import_libs=True, dev=False):
     """
     Initializes tpRigToolkit module
-    :param do_reload: bool, Whether to reload modules or not
     :param import_libs: bool, Whether to import deps libraries by default or not
     :param dev: bool, Whether tpRigToolkit is initialized in dev mode or not
     """
 
-    # Load logger configuration
-    logging.config.fileConfig(get_logging_config(), disable_existing_loggers=False)
+    import tpDcc
+    from tpDcc.libs.python import importer
+    from tpRigToolkit import register
 
-    from tpPyUtils import importer
+    if dev:
+        register.cleanup()
 
-    class tpRigToolkit(importer.Importer, object):
-        def __init__(self, debug=False):
-            super(tpRigToolkit, self).__init__(module_name='tpRigToolkit', debug=debug)
+    logger = create_logger(dev=dev)
 
-        def get_module_path(self):
-            """
-            Returns path where tpNameIt module is stored
-            :return: str
-            """
-
-            try:
-                mod_dir = os.path.dirname(
-                    inspect.getframeinfo(inspect.currentframe()).filename)
-            except Exception:
-                try:
-                    mod_dir = os.path.dirname(__file__)
-                except Exception:
-                    try:
-                        import tpRigToolkit
-                        mod_dir = tpRigToolkit.__path__[0]
-                    except Exception:
-                        return None
-
-            return mod_dir
-
-    packages_order = [
-        'tpRigToolkit.utils',
-        'tpRigToolkit.core',
-        'tpRigToolkit.widgets'
-    ]
+    register.register_class('logger', logger)
 
     if import_libs:
-        import tpPyUtils
-        tpPyUtils.init(do_reload=do_reload)
-        import tpDccLib
-        tpDccLib.init(do_reload=do_reload)
-        import tpQtLib
-        tpQtLib.init(do_reload=do_reload)
-        import tpNameIt
-        tpNameIt.init(do_reload=do_reload)
+        import tpDcc.loader as dcc_loader
 
-    rigtoolkit_importer = importer.init_importer(importer_class=tpRigToolkit, do_reload=False, debug=dev)
-    rigtoolkit_importer.import_packages(
-        order=packages_order,
-        only_packages=False)
-    if do_reload:
-        rigtoolkit_importer.reload_all()
-        modules_to_remove = list()
-        for m in os.sys.modules.keys():
-            if 'PyFlow' in m and 'LoggerTool' not in m:
-                modules_to_remove.append(m)
-        for t in modules_to_remove:
-            os.sys.modules.pop(t)
+        dcc_loader.init(dev=dev)
 
-    create_logger_directory()
+    skip_modules = ['{}.{}'.format(PACKAGE, name) for name in ['libs', 'tools']]
+    importer.init_importer(package=PACKAGE, skip_modules=skip_modules)
 
-    from tpRigToolkit.core import resource
-    resources_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'resources')
-    resource.ResourceManager().register_resource(resources_path)
+    # if do_reload:
+    #     rigtoolkit_importer.reload_all()
+    #     modules_to_remove = list()
+    #     for m in os.sys.modules.keys():
+    #         if 'PyFlow' in m and 'LoggerTool' not in m:
+    #             modules_to_remove.append(m)
+    #     for t in modules_to_remove:
+    #         os.sys.modules.pop(t)
 
-    register_tools(dev=dev)
+    init_managers(dev=dev)
+
+    dcc_loader_module = tpDcc.get_dcc_loader_module('tpRigToolkit.dccs')
+    if dcc_loader_module:
+        dcc_loader_module.init(dev=dev)
 
 
-def create_logger_directory():
+def init_managers(dev=True):
     """
-    Creates tpRigToolkit logger directory
+    Initializes all tpDcc managers
+    """
+
+    import tpDcc
+    from tpRigToolkit import config, toolsets
+
+    # Register resources
+    resources_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'resources')
+    tpDcc.ResourcesMgr().register_resource(resources_path)
+
+    # Register configuration files
+    tpDcc.ConfigsMgr().register_package_configs('tpRigToolkit', os.path.dirname(config.__file__))
+
+    core_config = tpDcc.ConfigsMgr().get_config(
+        'tpRigToolkit-core',
+        environment='development' if dev else 'production'
+    )
+    if not core_config:
+        tpDcc.logger.warning(
+            'tpRigToolkit-core configuration file not found! '
+            'Make sure that you have tpRigToolkit-config package installed!')
+        return None
+
+    # Register resources
+    resources_path = os.path.normpath(os.path.join(os.path.dirname(__file__), 'resources'))
+    tpDcc.ResourcesMgr().register_resource(resources_path)
+
+    # Register tools
+    tools_to_load = core_config.get('tools', list())
+    tpDcc.ToolsMgr().register_package_tools(pkg_name=PACKAGE, tools_to_register=tools_to_load, dev=dev)
+    tpDcc.ToolsMgr().load_registered_tools(PACKAGE)
+
+    # Create tpRigToolkit menu
+    tpDcc.MenusMgr().create_menus(package_name=PACKAGE)
+
+    # Register toolsets
+    tpDcc.ToolsetsMgr().register_path(PACKAGE, os.path.dirname(os.path.abspath(toolsets.__file__)))
+    tpDcc.ToolsetsMgr().load_registered_toolsets(package_name=PACKAGE, tools_to_load=tools_to_load)
+
+
+def create_logger(dev=False):
+    """
+    Returns logger of current module
     """
 
     logger_dir = os.path.normpath(os.path.join(os.path.expanduser('~'), 'tpRigToolkit', 'logs'))
     if not os.path.isdir(logger_dir):
         os.makedirs(logger_dir)
 
+    logging_config = os.path.normpath(os.path.join(os.path.dirname(__file__), '__logging__.ini'))
 
-def get_logging_config():
-    """
-    Returns logging configuration file path
-    :return: str
-    """
+    logging.config.fileConfig(logging_config, disable_existing_loggers=False)
+    logger = logging.getLogger('tpRigToolkit')
+    if dev:
+        logger.setLevel(logging.DEBUG)
+        for handler in logger.handlers:
+            handler.setLevel(logging.DEBUG)
 
-    create_logger_directory()
-
-    return os.path.normpath(os.path.join(os.path.dirname(__file__), '__logging__.ini'))
-
-
-def get_resources_path():
-    """
-    Returns path where resources for tpRigToolkit are stored
-    :return: str
-    """
-
-    return os.path.normpath(os.path.join(os.path.dirname(__file__), 'resources'))
-
-
-def register_tools(dev=True):
-    """
-    Function that register all available tools for tpRigToolkit
-    """
-
-    import tpRigToolkit
-    from tpRigToolkit.core import config
-
-    if python.is_python2():
-        import pkgutil as loader
-    else:
-        import importlib as loader
-
-    environment = 'development' if dev else 'production'
-
-    core_config = config.get_config('tpRigToolkit-core')
-    tools = core_config.get('tools', list())
-    tools_to_register = OrderedDict()
-    tools_path = '{}.tools.{}'
-    for tool_name in tools:
-        for pkg in ['tpRigToolkit']:
-            pkg_path = tools_path.format(pkg, tool_name)
-            pkg_loader = loader.find_loader(pkg_path)
-            if tool_name not in tools_to_register:
-                tools_to_register[tool_name] = list()
-            if pkg_loader is not None:
-                tools_to_register[tool_name].append(pkg_loader)
-
-    for pkg_loaders in tools_to_register.values():
-        tpRigToolkit.ToolsMgr().register_tool(pkg_loaders=pkg_loaders, environment=environment)
+    return logger

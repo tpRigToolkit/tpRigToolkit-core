@@ -1,0 +1,12 @@
+# Defines tpRigToolkit General Tools toolset
+
+    type: rigging
+    name: Rigging
+    color: [45, 150, 255]
+    hue_shift: 0
+    toolsets:
+      - tpRigToolkit-tools-jointorient
+      - tpRigToolkit-tools-controlrig
+      - tpRigToolkit-tools-rignode
+      - tpRigToolkit-tools-rigtoolbox
+      - tpRigToolkit-tools-rigbuilder

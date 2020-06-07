@@ -14,7 +14,9 @@ __email__ = "tpovedatd@gmail.com"
 
 import logging.config
 
-from tpQtLib.core import base
+from Qt.QtCore import *
+
+from tpDcc.libs.qt.core import base
 
 import tpRigToolkit.register
 
@@ -95,10 +97,50 @@ class Tool(base.BaseWidget, object):
 
         return self._attacher.save_settings()
 
+    def menu_bar(self):
+        """
+        Returns attacher menu bar
+        :return: QMenuBar
+        """
+
+        if not self._attacher:
+            return None
+
+        return self._attacher.menuBar()
+
+    def add_dock(self, name, **kwargs):
+        """
+        Adds a new dockable widget to the window
+        :param name: str, name of the dock widget
+        :return: QDockWidget
+        """
+
+        if not self._attacher:
+            return None
+
+        if not hasattr(self._attacher, 'add_dock'):
+            return None
+
+        return self._attacher.add_dock(name=name, **kwargs)
+
+    def add_toolbar(self, name, area=Qt.TopToolBarArea):
+        """
+        Adds a new toolbar to the window
+        :return:  QToolBar
+        """
+
+        if not self._attacher:
+            return None
+
+        if not hasattr(self._attacher, 'add_toolbar'):
+            return None
+
+        return self._attacher.add_toolbar(name=name, area=area)
+
     def register_callback(self, callback_type, fn):
         """
         Registers the given callback with the given function
-        :param callback_type: tpDccLib.DccCallbacks
+        :param callback_type: tpDcc.DccCallbacks
         :param fn: Python function to be called when callback is emitted
         """
 

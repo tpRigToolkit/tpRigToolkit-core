@@ -17,13 +17,11 @@ import webbrowser
 from Qt.QtCore import *
 from Qt.QtWidgets import *
 
-import tpDccLib as tp
+import tpDcc as tp
 
-import tpQtLib
-from tpQtLib.core import qtutils, statusbar
+from tpDcc.libs.qt.core import qtutils, statusbar
 
 import tpRigToolkit
-from tpRigToolkit.core import resource
 
 
 class WindowStatusBar(statusbar.StatusWidget, object):
@@ -37,13 +35,13 @@ class WindowStatusBar(statusbar.StatusWidget, object):
         self._info_btn = QPushButton()
         self._info_btn.setIconSize(QSize(25, 25))
         self._info_btn.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
-        self._info_btn.setIcon(resource.ResourceManager().icon('info1'))
+        self._info_btn.setIcon(tp.ResourcesMgr().icon('info1'))
         self._info_btn.setStyleSheet('QWidget {background-color: rgba(255, 255, 255, 0); border:0px;}')
 
         self._bug_btn = QPushButton()
         self._bug_btn.setIconSize(QSize(25, 25))
         self._bug_btn.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
-        self._bug_btn.setIcon(resource.ResourceManager().icon('bug'))
+        self._bug_btn.setIcon(tp.ResourcesMgr().icon('bug'))
         self._bug_btn.setStyleSheet('QWidget {background-color: rgba(255, 255, 255, 0); border:0px;}')
 
         self.main_layout.insertWidget(0, self._info_btn)
@@ -138,7 +136,7 @@ class WindowStatusBar(statusbar.StatusWidget, object):
         self.open_info_url()
 
 
-class MainWindow(tpQtLib.Window, object):
+class MainWindow(tp.Window, object):
 
     LOGO_NAME = None
     STATUS_BAR_WIDGET = WindowStatusBar
@@ -255,7 +253,7 @@ class MainWindow(tpQtLib.Window, object):
             self._status_bar.show_info()
 
     def _get_icon(self):
-        return resource.ResourceManager().icon('tprigtoolkit')
+        return tp.ResourcesMgr().icon('tprigtoolkit')
 
 
 def dock_window(window_class, min_width=300):
