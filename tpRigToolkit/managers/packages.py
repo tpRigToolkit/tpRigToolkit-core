@@ -215,7 +215,8 @@ class PackagesManager(object):
                 if p.is_value_port():
                     internal_type = p.internal_data_structure()
                     if internal_type in registered_internal_port_data_types:
-                        raise Exception('Pin with "{}" internal data type already been registered!'.format(internal_type))
+                        raise Exception(
+                            'Port with "{}" internal data type already been registered!'.format(internal_type))
                     registered_internal_port_data_types.add(internal_type)
 
             ui_nodes_factory = mod.ui_nodes_factory_classes
