@@ -17,23 +17,25 @@ from tpRigToolkit.tools import rigbuilder
 
 @decorators.Singleton
 class RigToolkitNameLib(namelib.NameLib, object):
-    def __init__(self):
+    def __init__(self, dev=False):
         namelib.NameLib.__init__(self)
-        config = tpDcc.ConfigsMgr().get_config('tpRigToolkit-naming')
+        environment = 'development' if dev else 'production'
+        config = tpDcc.ConfigsMgr().get_config('tpRigToolkit-names', environment=environment)
         self.naming_file = config.get_path()
         self.init_naming_data()
 
 
 class RigToolkitNamesManager(object):
 
-    def get_auto_suffixes(self):
+    def get_auto_suffixes(self, dev=True):
         """
         Returns dictionary containing suffixes that can be used to handle nomenclature
         :return:
         """
 
+        environment = 'development' if dev else 'production'
         naming_config = tpDcc.ConfigsMgr().get_config(
-            config_name='tpRigToolkit-naming', environment='development')
+            config_name='tpRigToolkit-naming', environment=environment)
         if not naming_config:
             return dict()
 
@@ -43,25 +45,35 @@ class RigToolkitNamesManager(object):
 
         return auto_suffixes_dict
 
-    def parse_name(self, node_name, rule_name=None):
+    def parse_name(self, node_name, rule_name=None, dev=False):
         """
         Parse a current solved name and return its different fields (metadata information)
         :param node_name: str
         :param rule_name: str
+        :param dev: bool
         :return: dict(str)
         """
 
-        project = rigbuilder.project
-        if not project:
-            tpRigToolkit.logger.warning('Impossible to solve node name because project is not defined!')
-            return None
-        name_lib = project.naming_lib
+        try:
+            project = rigbuilder.project
+        except Exception:
+            project = None
+
+        if project:
+            name_lib = project.naming_lib
+        else:
+            name_lib = RigToolkitNameLib(dev=dev)
 
         rule = None
         if not rule_name:
-            rule = project.get_name_rule()
-            if rule:
-                rule_name = rule.name
+            if project:
+                rule = project.get_name_rule()
+                if rule:
+                    rule_name = rule.name
+            else:
+                rule_name = 'default'
+                if name_lib.has_rule(rule_name):
+                    rule = name_lib.get_rule(rule_name)
         else:
             if name_lib.has_rule(rule_name):
                 rule = name_lib.get_rule(rule_name)
@@ -82,12 +94,13 @@ class RigToolkitNamesManager(object):
 
         return parsed_name
 
-    def solve_node_name_by_type(self, node_names=None, **kwargs):
+    def solve_node_name_by_type(self, node_names=None, dev=False, **kwargs):
         """
         Resolves node name taking into account its type
         In this case, the type of the node will be used to retrieve an an automatic rule
         The rule name will be retrieved using auto_suffix dict from tpDcc-naming configuration file
         :param node_names: str or list, name of the node we want to take name of
+        :param dev: bool
         :return: str
         """
 
@@ -98,11 +111,15 @@ class RigToolkitNamesManager(object):
         import tpDcc.dccs.maya as maya
         from tpDcc.dccs.maya.core import name
 
-        project = rigbuilder.project
-        if not project:
-            tpRigToolkit.logger.warning('Impossible to solve node name by type because project is not defined!')
-            return None
-        name_lib = project.naming_lib
+        try:
+            project = rigbuilder.project
+        except Exception:
+            project = None
+
+        if project:
+            name_lib = project.naming_lib
+        else:
+            name_lib = RigToolkitNameLib(dev=dev)
 
         auto_suffix = self.get_auto_suffixes()
         if not auto_suffix:
@@ -174,11 +191,15 @@ class RigToolkitNamesManager(object):
         if not solved_names:
             return
 
+        unique_name = kwargs.get('unique_name', False)
+
         for obj_id, solved_name in solved_names.items():
             obj_name = maya.cmds.ls(obj_id, long=True)[0]
             if not solved_names:
                 return_names.append(obj_name)
             else:
+                if unique_name:
+                    solved_name = tpDcc.Dcc.find_unique_name(solved_name)
                 new_name = name.rename(obj_name, solved_name, uuid=obj_id, rename_shape=True)
                 return_names.append(new_name)
 
@@ -187,23 +208,40 @@ class RigToolkitNamesManager(object):
     def solve_name(self, *args, **kwargs):
         """
         Resolves name with given rule and attributes
-        :param rule_name: str
         :param args: list
         :param kwargs: dict
         """
 
-        project = rigbuilder.project
-        if not project:
-            tpRigToolkit.logger.warning('Impossible to solve node name because project is not defined!')
-            return None
-        name_lib = project.naming_lib
+        dev = kwargs.get('dev', False)
+        use_auto_suffix = kwargs.pop('use_auto_suffix', True)
+        node_type = kwargs.get('node_type', None)
+
+        if use_auto_suffix and node_type:
+            auto_suffixes = tpRigToolkit.NamesMgr().get_auto_suffixes() or dict()
+            if node_type in auto_suffixes:
+                kwargs['node_type'] = auto_suffixes[node_type]
+
+        try:
+            project = rigbuilder.project
+        except Exception:
+            project = None
+
+        if project:
+            name_lib = project.naming_lib
+        else:
+            name_lib = RigToolkitNameLib(dev=dev)
 
         rule_name = kwargs.pop('rule_name', None)
         rule = None
         if not rule_name:
-            rule = project.get_name_rule()
-            if rule:
-                rule_name = rule.name
+            if project:
+                rule = project.get_name_rule()
+                if rule:
+                    rule_name = rule.name
+            else:
+                rule_name = 'default'
+                if name_lib.has_rule(rule_name):
+                    rule = name_lib.get_rule(rule_name)
         else:
             if name_lib.has_rule(rule_name):
                 rule = name_lib.get_rule(rule_name)
@@ -222,7 +260,13 @@ class RigToolkitNamesManager(object):
         else:
             name_lib.set_active_rule(None)
 
-        return solved_name or kwargs.get('default', None)
+        solved_name = solved_name or kwargs.get('default', None)
+
+        unique_name = kwargs.get('unique_name', False)
+        if solved_name and unique_name:
+            solved_name = tpDcc.Dcc.find_unique_name(solved_name)
+
+        return solved_name
 
 
 @decorators.Singleton
