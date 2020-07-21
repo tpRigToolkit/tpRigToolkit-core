@@ -15,6 +15,9 @@ __email__ = "tpovedatd@gmail.com"
 import os
 import logging.config
 
+import tpDcc
+from tpRigToolkit import register
+
 # =================================================================================
 
 PACKAGE = 'tpRigToolkit'
@@ -29,10 +32,6 @@ def init(import_libs=True, dev=False):
     :param dev: bool, Whether tpRigToolkit is initialized in dev mode or not
     """
 
-    import tpDcc
-    from tpDcc.libs.python import importer
-    from tpRigToolkit import register
-
     if dev:
         register.cleanup()
 
@@ -42,20 +41,23 @@ def init(import_libs=True, dev=False):
 
     if import_libs:
         import tpDcc.loader as dcc_loader
-
         dcc_loader.init(dev=dev)
 
-    skip_modules = ['{}.{}'.format(PACKAGE, name) for name in ['libs', 'tools']]
-    importer.init_importer(package=PACKAGE, skip_modules=skip_modules)
+    # We do the importer and registering of the classes after ensuring tpDcc is loaded
+    from tpRigToolkit.managers import data as data_manager, names as names_manager, packages as packages_manager
+    from tpRigToolkit.managers import plugins as plugins_manager, scripts as scripts_manager
+    from tpRigToolkit.widgets import window, dialog
 
-    # if do_reload:
-    #     rigtoolkit_importer.reload_all()
-    #     modules_to_remove = list()
-    #     for m in os.sys.modules.keys():
-    #         if 'PyFlow' in m and 'LoggerTool' not in m:
-    #             modules_to_remove.append(m)
-    #     for t in modules_to_remove:
-    #         os.sys.modules.pop(t)
+    register.register_class('DataMgr', data_manager.DataManagerSingleton)
+    register.register_class('NamesMgr', names_manager.RigToolkitNamesManagerSingleton)
+    register.register_class('PackagesMgr', packages_manager.PackagesManagerSingleton)
+    register.register_class('PluginsMgr', plugins_manager.PluginsManagerSingleton)
+    register.register_class('ScriptsMgr', scripts_manager.ScriptsManagerSingleton)
+    register.register_class('Window', window.MainWindow)
+    register.register_class('Dialog', dialog.MainDialog)
+
+    # skip_modules = ['{}.{}'.format(PACKAGE, name) for name in ['libs', 'tools']]
+    # importer.init_importer(package=PACKAGE, skip_modules=skip_modules)
 
     init_managers(dev=dev)
 
@@ -70,6 +72,7 @@ def init_managers(dev=True):
     """
 
     import tpDcc
+    import tpRigToolkit
     from tpRigToolkit import config, toolsets
 
     # Register resources
@@ -105,6 +108,10 @@ def init_managers(dev=True):
     tpDcc.ToolsetsMgr().register_path(PACKAGE, os.path.dirname(os.path.abspath(toolsets.__file__)))
     tpDcc.ToolsetsMgr().load_registered_toolsets(package_name=PACKAGE, tools_to_load=tools_to_load)
 
+    # Initialize data and scripts manager
+    tpRigToolkit.DataMgr()
+    tpRigToolkit.ScriptsMgr()
+
 
 def create_logger(dev=False):
     """
@@ -125,3 +132,7 @@ def create_logger(dev=False):
             handler.setLevel(logging.DEBUG)
 
     return logger
+
+
+if __name__ == '__main__':
+    print('Hello World!')

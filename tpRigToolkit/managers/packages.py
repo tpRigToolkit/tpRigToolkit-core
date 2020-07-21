@@ -15,11 +15,16 @@ from collections import defaultdict
 
 from tpDcc.libs.python import python, decorators
 
-import tpRigToolkit
 from tpRigToolkit import packages
-from tpRigToolkit.core import package
+# from tpRigToolkit.core import package
 
 LOGGER = logging.getLogger('tpRigToolkit')
+
+"""
+TODO
+This is class is related to PyFlow packages implementation. We do not need altough before removing it we should
+check if this can be useful for the RigNode implementation
+"""
 
 
 class PackagesManager(object):
@@ -282,4 +287,3 @@ class PackagesManagerSingleton(PackagesManager, object):
         PackagesManager.__init__(self)
 
 
-tpRigToolkit.register.register_class('PackagesMgr', PackagesManagerSingleton)

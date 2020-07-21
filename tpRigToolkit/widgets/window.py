@@ -220,7 +220,7 @@ class MainWindow(tp.Window, object):
 
     def closeEvent(self, event):
         if self._tool:
-            self._tool.close_tool()
+            self._tool.close_plugin()
         super(MainWindow, self).closeEvent(event)
 
     def add_toolbar(self, name, area=Qt.TopToolBarArea):
@@ -287,4 +287,3 @@ def dock_window(window_class, min_width=300):
     return win
 
 
-tpRigToolkit.register.register_class('Window', MainWindow)
