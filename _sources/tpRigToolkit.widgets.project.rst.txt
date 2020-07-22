@@ -1,0 +1,7 @@
+tpRigToolkit.widgets.project module
+===================================
+
+.. automodule:: tpRigToolkit.widgets.project
+   :members:
+   :undoc-members:
+   :show-inheritance:

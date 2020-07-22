@@ -1,0 +1,24 @@
+tpRigToolkit.widgets.options package
+====================================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   tpRigToolkit.widgets.options.bone
+   tpRigToolkit.widgets.options.bonecontrollink
+   tpRigToolkit.widgets.options.control
+   tpRigToolkit.widgets.options.factory
+   tpRigToolkit.widgets.options.rigoption
+   tpRigToolkit.widgets.options.rigoptionlist
+   tpRigToolkit.widgets.options.rigoptionsviewer
+
+Module contents
+---------------
+
+.. automodule:: tpRigToolkit.widgets.options
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,7 @@
+tpRigToolkit.widgets.options.rigoption module
+=============================================
+
+.. automodule:: tpRigToolkit.widgets.options.rigoption
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,19 @@
+tpRigToolkit.plugins package
+============================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   tpRigToolkit.plugins.renamer
+   tpRigToolkit.plugins.scripteditor
+
+Module contents
+---------------
+
+.. automodule:: tpRigToolkit.plugins
+   :members:
+   :undoc-members:
+   :show-inheritance:

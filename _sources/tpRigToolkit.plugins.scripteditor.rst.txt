@@ -1,0 +1,7 @@
+tpRigToolkit.plugins.scripteditor module
+========================================
+
+.. automodule:: tpRigToolkit.plugins.scripteditor
+   :members:
+   :undoc-members:
+   :show-inheritance:

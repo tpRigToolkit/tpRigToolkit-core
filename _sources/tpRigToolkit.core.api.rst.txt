@@ -1,0 +1,7 @@
+tpRigToolkit.core.api module
+============================
+
+.. automodule:: tpRigToolkit.core.api
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,7 @@
+tpRigToolkit.widgets.options.control module
+===========================================
+
+.. automodule:: tpRigToolkit.widgets.options.control
+   :members:
+   :undoc-members:
+   :show-inheritance:

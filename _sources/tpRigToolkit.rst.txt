@@ -12,6 +12,7 @@ Subpackages
    tpRigToolkit.libs
    tpRigToolkit.managers
    tpRigToolkit.packages
+   tpRigToolkit.plugins
    tpRigToolkit.tools
    tpRigToolkit.toolsets
    tpRigToolkit.widgets

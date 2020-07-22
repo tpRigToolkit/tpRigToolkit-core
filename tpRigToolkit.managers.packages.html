@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,12 +11,18 @@
   
 
   
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -29,13 +34,9 @@
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="tpRigToolkit.packages package" href="tpRigToolkit.packages.html" />
+    <link rel="next" title="tpRigToolkit.managers.plugins module" href="tpRigToolkit.managers.plugins.html" />
     <link rel="prev" title="tpRigToolkit.managers.names module" href="tpRigToolkit.managers.names.html" /> 
 </head>
 
@@ -50,7 +51,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> tpRigToolkit
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> tpRigToolkit
           
 
           
@@ -77,6 +78,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -94,6 +96,7 @@
 <li class="toctree-l4"><a class="reference internal" href="tpRigToolkit.libs.html">tpRigToolkit.libs package</a></li>
 <li class="toctree-l4 current"><a class="reference internal" href="tpRigToolkit.managers.html">tpRigToolkit.managers package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tpRigToolkit.packages.html">tpRigToolkit.packages package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tpRigToolkit.plugins.html">tpRigToolkit.plugins package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tpRigToolkit.tools.html">tpRigToolkit.tools package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tpRigToolkit.toolsets.html">tpRigToolkit.toolsets package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tpRigToolkit.widgets.html">tpRigToolkit.widgets package</a></li>
@@ -110,6 +113,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -148,7 +152,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="modules.html">tpRigToolkit</a> &raquo;</li>
         
@@ -176,8 +180,140 @@
 
            <div itemprop="articleBody">
             
-  <div class="section" id="tprigtoolkit-managers-packages-module">
-<h1>tpRigToolkit.managers.packages module<a class="headerlink" href="#tprigtoolkit-managers-packages-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-tpRigToolkit.managers.packages">
+<span id="tprigtoolkit-managers-packages-module"></span><h1>tpRigToolkit.managers.packages module<a class="headerlink" href="#module-tpRigToolkit.managers.packages" title="Permalink to this headline">¶</a></h1>
+<p>Module that contains implementation for node manager</p>
+<dl class="py data">
+<dt id="tpRigToolkit.managers.packages.LOGGER">
+<code class="sig-prename descclassname">tpRigToolkit.managers.packages.</code><code class="sig-name descname">LOGGER</code><em class="property"> = &lt;Logger tpRigToolkit (WARNING)&gt;</em><a class="headerlink" href="#tpRigToolkit.managers.packages.LOGGER" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO
+This is class is related to PyFlow packages implementation. We do not need altough before removing it we should
+check if this can be useful for the RigNode implementation</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="tpRigToolkit.managers.packages.PackagesManager">
+<em class="property">class </em><code class="sig-prename descclassname">tpRigToolkit.managers.packages.</code><code class="sig-name descname">PackagesManager</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">package_paths</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.managers.packages.PackagesManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt id="tpRigToolkit.managers.packages.PackagesManager.ENV_VAR_NAME">
+<code class="sig-name descname">ENV_VAR_NAME</code><em class="property"> = 'TPRIGTOOLKIT_PACKAGE_PATHS'</em><a class="headerlink" href="#tpRigToolkit.managers.packages.PackagesManager.ENV_VAR_NAME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tpRigToolkit.managers.packages.PackagesManager.ENV_VAR_PATHS_DELIMITER">
+<code class="sig-name descname">ENV_VAR_PATHS_DELIMITER</code><em class="property"> = ';'</em><a class="headerlink" href="#tpRigToolkit.managers.packages.PackagesManager.ENV_VAR_PATHS_DELIMITER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tpRigToolkit.managers.packages.PackagesManager.initialize">
+<code class="sig-name descname">initialize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.managers.packages.PackagesManager.initialize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tpRigToolkit.managers.packages.PackagesManager.register_input_widgets_factory">
+<code class="sig-name descname">register_input_widgets_factory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module_name</span></em>, <em class="sig-param"><span class="n">factory</span></em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.managers.packages.PackagesManager.register_input_widgets_factory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registers given factory and maps it to given module name
+:param module_name: str
+:param factory: Factory</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="tpRigToolkit.managers.packages.PackagesManager.register_module_path">
+<code class="sig-name descname">register_module_path</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module_path</span></em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.managers.packages.PackagesManager.register_module_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registers given path into the manager so path is taking into account when loading tpNodeGrpah modules
+:param module_path: str</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="tpRigToolkit.managers.packages.PackagesManager.register_preference_widget">
+<code class="sig-name descname">register_preference_widget</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module_name</span></em>, <em class="sig-param"><span class="n">preference_widget_class</span></em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.managers.packages.PackagesManager.register_preference_widget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registers given preference widget class and maps it to the given module name
+:param module_name: str
+:param preference_widget_class: cls</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="tpRigToolkit.managers.packages.PackagesManager.register_tool">
+<code class="sig-name descname">register_tool</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module_name</span></em>, <em class="sig-param"><span class="n">tool_class</span></em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.managers.packages.PackagesManager.register_tool" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registers given tool class and maps it to given module name
+:param module_name: str
+:param tool_class: cls</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="tpRigToolkit.managers.packages.PackagesManager.register_ui_node_factory">
+<code class="sig-name descname">register_ui_node_factory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module_name</span></em>, <em class="sig-param"><span class="n">factory</span></em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.managers.packages.PackagesManager.register_ui_node_factory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registers given factory and maps it to given module name
+:param module_name: str
+:param factory: Factory</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="tpRigToolkit.managers.packages.PackagesManager.register_ui_port_factory">
+<code class="sig-name descname">register_ui_port_factory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module_name</span></em>, <em class="sig-param"><span class="n">factory</span></em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.managers.packages.PackagesManager.register_ui_port_factory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registers given factory and maps it to given module name
+:param module_name: str
+:param factory: Factory</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="tpRigToolkit.managers.packages.PackagesManager.registered_input_widgets_factories">
+<em class="property">property </em><code class="sig-name descname">registered_input_widgets_factories</code><a class="headerlink" href="#tpRigToolkit.managers.packages.PackagesManager.registered_input_widgets_factories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns dict containing registered input widgets
+:return: dict</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="tpRigToolkit.managers.packages.PackagesManager.registered_modules">
+<em class="property">property </em><code class="sig-name descname">registered_modules</code><a class="headerlink" href="#tpRigToolkit.managers.packages.PackagesManager.registered_modules" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns dict with the registered modules
+:return: dict</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="tpRigToolkit.managers.packages.PackagesManager.registered_modules_paths">
+<em class="property">property </em><code class="sig-name descname">registered_modules_paths</code><a class="headerlink" href="#tpRigToolkit.managers.packages.PackagesManager.registered_modules_paths" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns dict containing registered modules paths
+:return: dict</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="tpRigToolkit.managers.packages.PackagesManager.registered_prefs">
+<em class="property">property </em><code class="sig-name descname">registered_prefs</code><a class="headerlink" href="#tpRigToolkit.managers.packages.PackagesManager.registered_prefs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns dict containing registered preference widgets
+:return: dict</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="tpRigToolkit.managers.packages.PackagesManager.registered_tools">
+<em class="property">property </em><code class="sig-name descname">registered_tools</code><a class="headerlink" href="#tpRigToolkit.managers.packages.PackagesManager.registered_tools" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns dict containing registered tools
+:return: dict</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="tpRigToolkit.managers.packages.PackagesManager.registered_ui_nodes_factories">
+<em class="property">property </em><code class="sig-name descname">registered_ui_nodes_factories</code><a class="headerlink" href="#tpRigToolkit.managers.packages.PackagesManager.registered_ui_nodes_factories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns dict containing registered UI nodes factories
+:return: dict</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="tpRigToolkit.managers.packages.PackagesManager.registered_ui_ports_factories">
+<em class="property">property </em><code class="sig-name descname">registered_ui_ports_factories</code><a class="headerlink" href="#tpRigToolkit.managers.packages.PackagesManager.registered_ui_ports_factories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns dict containing registered UI ports factories
+:return: dict</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tpRigToolkit.managers.packages.PackagesManagerSingleton">
+<em class="property">class </em><code class="sig-prename descclassname">tpRigToolkit.managers.packages.</code><code class="sig-name descname">PackagesManagerSingleton</code><a class="headerlink" href="#tpRigToolkit.managers.packages.PackagesManagerSingleton" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tpRigToolkit.managers.packages.PackagesManager" title="tpRigToolkit.managers.packages.PackagesManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">tpRigToolkit.managers.packages.PackagesManager</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
 </div>
 
 
@@ -192,7 +328,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="tpRigToolkit.packages.html" class="btn btn-neutral float-right" title="tpRigToolkit.packages package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="tpRigToolkit.managers.plugins.html" class="btn btn-neutral float-right" title="tpRigToolkit.managers.plugins module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="tpRigToolkit.managers.names.html" class="btn btn-neutral float-left" title="tpRigToolkit.managers.names module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -204,11 +340,19 @@
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2020, Tomas Poveda
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -219,7 +363,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

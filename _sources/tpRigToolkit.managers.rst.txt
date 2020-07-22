@@ -7,8 +7,11 @@ Submodules
 .. toctree::
    :maxdepth: 4
 
+   tpRigToolkit.managers.data
    tpRigToolkit.managers.names
    tpRigToolkit.managers.packages
+   tpRigToolkit.managers.plugins
+   tpRigToolkit.managers.scripts
 
 Module contents
 ---------------

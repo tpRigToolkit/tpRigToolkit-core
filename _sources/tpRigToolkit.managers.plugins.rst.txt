@@ -1,0 +1,7 @@
+tpRigToolkit.managers.plugins module
+====================================
+
+.. automodule:: tpRigToolkit.managers.plugins
+   :members:
+   :undoc-members:
+   :show-inheritance:

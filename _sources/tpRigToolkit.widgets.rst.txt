@@ -1,6 +1,14 @@
 tpRigToolkit.widgets package
 ============================
 
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   tpRigToolkit.widgets.options
+
 Submodules
 ----------
 
@@ -8,6 +16,7 @@ Submodules
    :maxdepth: 4
 
    tpRigToolkit.widgets.dialog
+   tpRigToolkit.widgets.project
    tpRigToolkit.widgets.window
 
 Module contents

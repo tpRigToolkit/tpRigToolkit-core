@@ -1,0 +1,7 @@
+tpRigToolkit.plugins.renamer module
+===================================
+
+.. automodule:: tpRigToolkit.plugins.renamer
+   :members:
+   :undoc-members:
+   :show-inheritance:

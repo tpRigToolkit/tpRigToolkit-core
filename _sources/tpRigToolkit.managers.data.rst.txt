@@ -1,0 +1,7 @@
+tpRigToolkit.managers.data module
+=================================
+
+.. automodule:: tpRigToolkit.managers.data
+   :members:
+   :undoc-members:
+   :show-inheritance:

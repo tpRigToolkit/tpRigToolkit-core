@@ -1,0 +1,7 @@
+tpRigToolkit.widgets.options.bone module
+========================================
+
+.. automodule:: tpRigToolkit.widgets.options.bone
+   :members:
+   :undoc-members:
+   :show-inheritance:

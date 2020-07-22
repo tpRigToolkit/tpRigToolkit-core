@@ -1,0 +1,7 @@
+tpRigToolkit.core.consts module
+===============================
+
+.. automodule:: tpRigToolkit.core.consts
+   :members:
+   :undoc-members:
+   :show-inheritance:

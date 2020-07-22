@@ -1,0 +1,7 @@
+tpRigToolkit.widgets.options.factory module
+===========================================
+
+.. automodule:: tpRigToolkit.widgets.options.factory
+   :members:
+   :undoc-members:
+   :show-inheritance:
