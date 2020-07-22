@@ -3,11 +3,6 @@
 # ===================================================================
 
 Qt.py
-pytest
-pytest-cov
-coveralls
-sphinx
-sphinx_rtd_theme
 python-json-logger
 sentry-sdk
 pyyaml
@@ -16,5 +11,6 @@ tpDcc-libs-python
 tpDcc-core
 tpDcc-libs-qt
 tpDcc-dccs-maya
-tpDcc-tools-nameit
+tpDcc-libs-nameit
 tpRigToolkit-config
+# tpRigToolkit-tools-spaceswitcher
