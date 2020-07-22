@@ -196,5 +196,3 @@ class DataManager(manager.LibraryManager, object):
 class DataManagerSingleton(DataManager, object):
     def __init__(self):
         DataManager.__init__(self)
-
-

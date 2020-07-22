@@ -237,5 +237,3 @@ class RigToolkitNamesManager(object):
 class RigToolkitNamesManagerSingleton(RigToolkitNamesManager, object):
     def __init__(self):
         RigToolkitNamesManager.__init__(self)
-
-

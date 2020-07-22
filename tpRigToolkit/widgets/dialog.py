@@ -14,8 +14,6 @@ __email__ = "tpovedatd@gmail.com"
 
 import tpDcc
 
-import tpRigToolkit
-
 
 class MainDialog(tpDcc.Dialog, object):
 
@@ -75,7 +73,5 @@ class MainDialog(tpDcc.Dialog, object):
                     '{} Project Icon not found: {}!'.format(
                         self._project.name.title(), self._project.icon_name + '.png'))
 
-        return tpDcc.ResourcesMgr().icon('artella')
+        return tpDcc.ResourcesMgr().icon('tpdcc')
 
-
-tpRigToolkit.register.register_class('Dialog', MainDialog)

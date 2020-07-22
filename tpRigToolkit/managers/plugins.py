@@ -143,5 +143,3 @@ class PluginsManager(object):
 class PluginsManagerSingleton(PluginsManager, object):
     def __init__(self):
         PluginsManager.__init__(self)
-
-

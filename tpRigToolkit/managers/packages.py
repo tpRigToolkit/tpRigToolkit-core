@@ -285,5 +285,3 @@ class PackagesManager(object):
 class PackagesManagerSingleton(PackagesManager, object):
     def __init__(self):
         PackagesManager.__init__(self)
-
-
