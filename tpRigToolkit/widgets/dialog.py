@@ -74,4 +74,3 @@ class MainDialog(tpDcc.Dialog, object):
                         self._project.name.title(), self._project.icon_name + '.png'))
 
         return tpDcc.ResourcesMgr().icon('tpdcc')
-

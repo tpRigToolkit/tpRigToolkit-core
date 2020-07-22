@@ -50,7 +50,7 @@ class BoneControlLinkList(list.ListWidget, object):
     def _get_entry_widget(self, name):
         return BoneControlLinkItem(self._rig, name)
 
-    def _build_entry(self,  link_info=None):
+    def _build_entry(self, link_info=None):
         entry_widget = self._get_entry_widget(link_info)
         entry_widget.itemRemoved.connect(self._cleanup_garbage)
         entry_widget.valueChanged.connect(self._on_value_changed)
