@@ -10,6 +10,7 @@ Submodules
    tpRigToolkit.core.api
    tpRigToolkit.core.config
    tpRigToolkit.core.consts
+   tpRigToolkit.core.data
    tpRigToolkit.core.factory
    tpRigToolkit.core.log
    tpRigToolkit.core.package

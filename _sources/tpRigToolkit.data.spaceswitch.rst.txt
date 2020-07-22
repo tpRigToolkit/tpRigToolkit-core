@@ -1,0 +1,7 @@
+tpRigToolkit.data.spaceswitch module
+====================================
+
+.. automodule:: tpRigToolkit.data.spaceswitch
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,7 @@
+tpRigToolkit.data.skeleton module
+=================================
+
+.. automodule:: tpRigToolkit.data.skeleton
+   :members:
+   :undoc-members:
+   :show-inheritance:

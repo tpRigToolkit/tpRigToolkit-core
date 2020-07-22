@@ -1,0 +1,19 @@
+tpRigToolkit.data package
+=========================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   tpRigToolkit.data.skeleton
+   tpRigToolkit.data.spaceswitch
+
+Module contents
+---------------
+
+.. automodule:: tpRigToolkit.data
+   :members:
+   :undoc-members:
+   :show-inheritance:
