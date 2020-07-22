@@ -11,9 +11,11 @@ Submodules
    tpRigToolkit.core.config
    tpRigToolkit.core.consts
    tpRigToolkit.core.factory
+   tpRigToolkit.core.log
    tpRigToolkit.core.package
    tpRigToolkit.core.plugin
    tpRigToolkit.core.tool
+   tpRigToolkit.core.utils
 
 Module contents
 ---------------

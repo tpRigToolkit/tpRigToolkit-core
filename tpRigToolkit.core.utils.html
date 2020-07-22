@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>tpRigToolkit.core.factory module &mdash; tpRigToolkit 0.0.l documentation</title>
+  <title>tpRigToolkit.core.utils module &mdash; tpRigToolkit 0.0.l documentation</title>
   
 
   
@@ -36,8 +36,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="tpRigToolkit.core.log module" href="tpRigToolkit.core.log.html" />
-    <link rel="prev" title="tpRigToolkit.core.consts module" href="tpRigToolkit.core.consts.html" /> 
+    <link rel="next" title="tpRigToolkit.dccs package" href="tpRigToolkit.dccs.html" />
+    <link rel="prev" title="tpRigToolkit.core.tool module" href="tpRigToolkit.core.tool.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -160,13 +160,13 @@
         
           <li><a href="tpRigToolkit.core.html">tpRigToolkit.core package</a> &raquo;</li>
         
-      <li>tpRigToolkit.core.factory module</li>
+      <li>tpRigToolkit.core.utils module</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/tpRigToolkit.core.factory.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/tpRigToolkit.core.utils.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -180,50 +180,23 @@
 
            <div itemprop="articleBody">
             
-  <div class="section" id="module-tpRigToolkit.core.factory">
-<span id="tprigtoolkit-core-factory-module"></span><h1>tpRigToolkit.core.factory module<a class="headerlink" href="#module-tpRigToolkit.core.factory" title="Permalink to this headline">¶</a></h1>
-<p>Module that contains base class to create tpNodeGraph factories</p>
-<dl class="py class">
-<dt id="tpRigToolkit.core.factory.Factory">
-<em class="property">class </em><code class="sig-prename descclassname">tpRigToolkit.core.factory.</code><code class="sig-name descname">Factory</code><a class="headerlink" href="#tpRigToolkit.core.factory.Factory" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Base class that defines factory classes</p>
-<dl class="py method">
-<dt id="tpRigToolkit.core.factory.Factory.create">
-<code class="sig-name descname">create</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">raw_inst</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.factory.Factory.create" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
+  <div class="section" id="module-tpRigToolkit.core.utils">
+<span id="tprigtoolkit-core-utils-module"></span><h1>tpRigToolkit.core.utils module<a class="headerlink" href="#module-tpRigToolkit.core.utils" title="Permalink to this headline">¶</a></h1>
+<p>Module that contains utils functions for tpRigToolkit</p>
+<dl class="py function">
+<dt id="tpRigToolkit.core.utils.copy">
+<code class="sig-prename descclassname">tpRigToolkit.core.utils.</code><code class="sig-name descname">copy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">source</span></em>, <em class="sig-param"><span class="n">target</span></em>, <em class="sig-param"><span class="n">description</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.utils.copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copies given file or files and creates a new version of the file with the given description
+:param source: str, source file or folder we want to copy
+:param target: str, destination file or folder we want to copy into
+:param description: str, description of the new version</p>
 </dd></dl>
 
-<dl class="py class">
-<dt id="tpRigToolkit.core.factory.InputWidgetsFactory">
-<em class="property">class </em><code class="sig-prename descclassname">tpRigToolkit.core.factory.</code><code class="sig-name descname">InputWidgetsFactory</code><a class="headerlink" href="#tpRigToolkit.core.factory.InputWidgetsFactory" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Base class that defines input widgets factory class</p>
-<dl class="py method">
-<dt id="tpRigToolkit.core.factory.InputWidgetsFactory.create">
-<code class="sig-name descname">create</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data_type</span></em>, <em class="sig-param"><span class="n">data_setter</span></em>, <em class="sig-param"><span class="n">default_value</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">widget_variant</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.factory.InputWidgetsFactory.create" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt id="tpRigToolkit.core.factory.NodeFactory">
-<em class="property">class </em><code class="sig-prename descclassname">tpRigToolkit.core.factory.</code><code class="sig-name descname">NodeFactory</code><a class="headerlink" href="#tpRigToolkit.core.factory.NodeFactory" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#tpRigToolkit.core.factory.Factory" title="tpRigToolkit.core.factory.Factory"><code class="xref py py-class docutils literal notranslate"><span class="pre">tpRigToolkit.core.factory.Factory</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Base class that defines node factory class</p>
-</dd></dl>
-
-<dl class="py class">
-<dt id="tpRigToolkit.core.factory.PinFactory">
-<em class="property">class </em><code class="sig-prename descclassname">tpRigToolkit.core.factory.</code><code class="sig-name descname">PinFactory</code><a class="headerlink" href="#tpRigToolkit.core.factory.PinFactory" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#tpRigToolkit.core.factory.Factory" title="tpRigToolkit.core.factory.Factory"><code class="xref py py-class docutils literal notranslate"><span class="pre">tpRigToolkit.core.factory.Factory</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Base class that defines node factory class</p>
-<dl class="py method">
-<dt id="tpRigToolkit.core.factory.PinFactory.create">
-<code class="sig-name descname">create</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">raw_inst</span></em>, <em class="sig-param"><span class="n">owning_node</span></em><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.factory.PinFactory.create" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
+<dl class="py function">
+<dt id="tpRigToolkit.core.utils.get_data_files_directory">
+<code class="sig-prename descclassname">tpRigToolkit.core.utils.</code><code class="sig-name descname">get_data_files_directory</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tpRigToolkit.core.utils.get_data_files_directory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns default paths where data files for tpRigToolkit are located
+:return: list(str)</p>
 </dd></dl>
 
 </div>
@@ -240,10 +213,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="tpRigToolkit.core.log.html" class="btn btn-neutral float-right" title="tpRigToolkit.core.log module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="tpRigToolkit.dccs.html" class="btn btn-neutral float-right" title="tpRigToolkit.dccs package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="tpRigToolkit.core.consts.html" class="btn btn-neutral float-left" title="tpRigToolkit.core.consts module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="tpRigToolkit.core.tool.html" class="btn btn-neutral float-left" title="tpRigToolkit.core.tool module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
