@@ -101,12 +101,13 @@ def init_managers(dev=True):
     tpDcc.ToolsMgr().register_package_tools(pkg_name=PACKAGE, tools_to_register=tools_to_load, dev=dev)
     tpDcc.ToolsMgr().load_registered_tools(PACKAGE)
 
-    # Create tpRigToolkit menu
-    tpDcc.MenusMgr().create_menus(package_name=PACKAGE)
-
     # Register toolsets
     tpDcc.ToolsetsMgr().register_path(PACKAGE, os.path.dirname(os.path.abspath(toolsets.__file__)))
     tpDcc.ToolsetsMgr().load_registered_toolsets(package_name=PACKAGE, tools_to_load=tools_to_load)
+
+    # Create tpRigToolkit menu
+    # The creation of the menu depends on the registered toolsets
+    tpDcc.MenusMgr().create_menus(package_name=PACKAGE, dev=dev)
 
     # Initialize data and scripts manager
     tpRigToolkit.DataMgr()
