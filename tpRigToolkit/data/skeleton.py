@@ -64,14 +64,23 @@ class SkeletonFileData(data.CustomData, object):
                 'Multiple root nodes found in skeleton. Only first one will be exported: {}'.format(root_nodes[0]))
         root_node = root_nodes[0]
 
-        skeleton_data = list()
+        skeleton_data = dict()
         child_nodes = tp.Dcc.list_children(root_node, children_type='transform')
         child_nodes.insert(0, root_node)
 
+        skeleton_data['header'] = dict()
+        skeleton_data['data'] = list()
+
+        # store skeleton header
+        dcc_name = tp.Dcc.get_name()
+        skeleton_data['header']['dcc'] = dcc_name
+        skeleton_data['header']['up_axis'] = tp.Dcc.get_up_axis_name()
+
+        # store skeleton data
         visited_nodes = dict()
         for i, node in enumerate(child_nodes):
             node_data = dict()
-            node_short_name = tp.Dcc.node_short_name(node)
+            node_short_name = tp.Dcc.node_short_name(node, remove_namespace=True)
             node_data['name'] = node_short_name
             node_data['index'] = i
             node_data['type'] = tp.Dcc.node_type(node)
@@ -81,13 +90,24 @@ class SkeletonFileData(data.CustomData, object):
             parent_index = None
             parent_node = tp.Dcc.node_parent(node)
             if parent_node:
-                parent_short_name = tp.Dcc.node_short_name(parent_node)
+                parent_short_name = tp.Dcc.node_short_name(parent_node, remove_namespace=True)
                 if parent_short_name in visited_nodes:
                     parent_index = visited_nodes[parent_short_name]
             if parent_index is None:
                 parent_index = -1
             node_data['parent_index'] = parent_index
-            skeleton_data.append(node_data)
+
+            node_data['side'] = tp.Dcc.get_side_labelling(node)
+            node_data['bone_type'] = tp.Dcc.get_type_labelling(node)
+            node_data['bone_other_type'] = tp.Dcc.get_other_type_labelling(node)
+            node_data['draw_label'] = tp.Dcc.get_draw_label_labelling(node)
+
+            node_namespace = tp.Dcc.node_namespace(node) or ''
+            if node_namespace.startswith('|'):
+                node_namespace = node_namespace[1:]
+            node_data['namespace'] = node_namespace
+
+            skeleton_data['data'].append(node_data)
         if not skeleton_data:
             tpRigToolkit.logger.warning('No skeleton data found!')
             return False
@@ -107,7 +127,7 @@ class SkeletonFileData(data.CustomData, object):
 
         return True
 
-    def import_data(self, file_path='', objects=None):
+    def import_data(self, file_path='', objects=None, namespace=None):
 
         file_path = file_path or self.get_file()
         if not file_path or not os.path.isfile(file_path):
@@ -120,12 +140,23 @@ class SkeletonFileData(data.CustomData, object):
             tpRigToolkit.logger.warning('No skeleton data found in file: "{}"'.format(file_path))
             return False
 
+        header = skeleton_data.get('header', dict())
+        data = skeleton_data.get('data', dict())
+        if not data:
+            # to support back compatibility
+            data = skeleton_data
+
         created_nodes = dict()
-        for node_data in skeleton_data:
+        for node_data in data:
             node_index = node_data.get('index', 0)
             node_parent_index = node_data.get('parent_index', -1)
             node_name = node_data.get('name', 'new_node')
             node_type = node_data.get('type', 'joint')
+            node_namespace = namespace if namespace else node_data.get('namespace', '')
+            node_label_side = node_data.get('side', '')
+            node_label_type = node_data.get('bone_type', '')
+            node_label_other_type = node_data.get('bone_other_type', '')
+            node_label_draw = node_data.get('draw_label', False)
             node_world_matrix = node_data.get(
                 'world_matrix', [1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0])
             tp.Dcc.clear_selection()
@@ -134,7 +165,11 @@ class SkeletonFileData(data.CustomData, object):
             else:
                 new_node = tp.Dcc.create_empty_group(name=node_name)
             tp.Dcc.set_node_world_matrix(new_node, node_world_matrix)
-            created_nodes[node_index] = {'node': new_node, 'parent_index': node_parent_index}
+            created_nodes[node_index] = {
+                'node': new_node, 'parent_index': node_parent_index, 'namespace': node_namespace,
+                'label_side': node_label_side, 'label_type': node_label_type,
+                'label_other_type': node_label_other_type, 'label_draw': node_label_draw
+            }
 
         for node_index, node_data in created_nodes.items():
             parent_index = node_data['parent_index']
@@ -144,11 +179,27 @@ class SkeletonFileData(data.CustomData, object):
             if not node_data:
                 continue
             node_name = node_data.get('node')
+
+            tp.Dcc.set_side_labelling(node_name, node_data.get('label_side'))
+            tp.Dcc.set_type_labelling(node_name, node_data.get('label_type'))
+            tp.Dcc.set_other_type_labelling(node_name, node_data.get('label_other_type'))
+            tp.Dcc.set_draw_label_labelling(node_name, node_data.get('label_draw'))
+
             parent_node_data = created_nodes.get(parent_index, None)
             if not parent_node_data:
                 continue
+
             parent_node_name = parent_node_data.get('node')
             tp.Dcc.set_parent(node_name, parent_node_name)
+
+        # We assign namespaces once the hierarchy of nodes is created
+        for node_index, node_data in created_nodes.items():
+            node_name = node_data.get('node')
+            node_namespace = node_data.get('namespace')
+            if node_namespace:
+                tp.Dcc.assign_node_namespace(node_name, node_namespace, force_create=True)
+
+        return True
 
 
 class SkeletonPreviewWidget(rig_data.DataPreviewWidget, object):
