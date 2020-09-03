@@ -10,7 +10,8 @@ from __future__ import print_function, division, absolute_import
 from Qt.QtCore import *
 from Qt.QtWidgets import *
 
-from tpRigToolkit.tools.renamer.widgets import renamer
+import tpDcc
+from tpDcc.tools.renamer.core import renamer
 
 from tpRigToolkit.core import plugin
 
@@ -35,12 +36,11 @@ class RenamerPlugin(plugin.DockPlugin, object):
     def show_plugin(self):
         super(RenamerPlugin, self).show_plugin()
 
-        self._renamer_widget = RenamerWidget()
+        # TODO: This should be defined
+        dev = False
+
+        naming_config = tpDcc.ConfigsMgr().get_config(
+            config_name='tpRigToolkit-naming', environment='development' if dev else 'production')
+        self._renamer_widget = renamer.RenamerToolsetWidget(naming_config=naming_config, parent=self)
         self._renamer_widget.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self._content_layout.addWidget(self._renamer_widget)
-
-
-class RenamerWidget(renamer.RigToolkitRenamerWidget, object):
-
-    def __init__(self, config=None, parent=None):
-        super(RenamerWidget, self).__init__(config=config, parent=parent)

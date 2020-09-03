@@ -133,7 +133,3 @@ def create_logger(dev=False):
             handler.setLevel(logging.DEBUG)
 
     return logger
-
-
-if __name__ == '__main__':
-    print('Hello World!')
