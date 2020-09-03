@@ -1,0 +1,17 @@
+sortOrder: -400
+type: nomenclature
+name: Nomenclature
+color: [31, 175, 200]
+hue_shift: 0
+toolsets:
+  - tpRigToolkit-tools-namemanager
+  - tpRigToolkit-tools-renamer
+
+menu:
+  - label: "Nomenclature"
+    type: "menu"
+    children:
+      - id: "tpRigToolkit-tools-namemanager"
+        type: "tool"
+      - id: "tpRigToolkit-tools-renamer"
+        type: "tool"
