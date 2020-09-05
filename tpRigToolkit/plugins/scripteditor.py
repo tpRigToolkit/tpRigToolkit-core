@@ -10,6 +10,7 @@ from __future__ import print_function, division, absolute_import
 from Qt.QtCore import *
 from Qt.QtWidgets import *
 
+from tpDcc.libs.qt.widgets import layouts
 from tpDcc.tools.scripteditor.widgets import scripteditor
 
 from tpRigToolkit.core import plugin
@@ -27,9 +28,7 @@ class ScriptsEditorPlugin(plugin.DockPlugin, object):
 
         self._script_editor_widget = None
         self._content = QWidget()
-        self._content_layout = QVBoxLayout()
-        self._content_layout.setContentsMargins(0, 0, 0, 0)
-        self._content_layout.setSpacing(0)
+        self._content_layout = layouts.VerticalLayout(spacing=0, margins=(0, 0, 0, 0))
         self._content.setLayout(self._content_layout)
         self.setWidget(self._content)
 
