@@ -5,7 +5,6 @@ color: [31, 175, 200]
 hue_shift: 0
 toolsets:
   - tpRigToolkit-tools-namemanager
-  - tpRigToolkit-tools-renamer
 
 menu:
   - label: "Nomenclature"
@@ -14,4 +13,12 @@ menu:
       - id: "tpRigToolkit-tools-namemanager"
         type: "tool"
       - id: "tpRigToolkit-tools-renamer"
-        type: "tool"
+        type: "command"
+        language: "python"
+        tags:
+          - names
+          - renamer
+        command: "names_config = tpDcc.ConfigsMgr().get_config(config_name='tpRigToolkit-names'); naming_config = tpDcc.ConfigsMgr().get_config(config_name='tpRigToolkit-naming'); tpDcc.ToolsMgr().launch_tool_by_id('tpDcc-tools-renamer', names_config=names_config, naming_config=naming_config)"
+        ui:
+          label: "Renamer"
+          icon: "tpRigToolkit"

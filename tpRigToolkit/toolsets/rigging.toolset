@@ -19,3 +19,5 @@ menu:
     children:
       - id: "tpRigToolkit-tools-controlrig"
         type: "tool"
+      - id: "tpRigToolkit-tools-rigtoolbox"
+        type: "tool"
