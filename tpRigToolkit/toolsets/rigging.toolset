@@ -1,4 +1,4 @@
-# Defines tpRigToolkit General Tools toolset
+# Defines tpRigToolkit Rigging Tools toolset
 
 sortOrder: -500
 type: rigging
@@ -6,18 +6,17 @@ name: Rigging
 color: [45, 150, 255]
 hue_shift: 0
 toolsets:
+  - tpRigToolkit-tools-rigtoolbox
   - tpRigToolkit-tools-jointorient
   - tpRigToolkit-tools-controlrig
-  - tpRigToolkit-tools-rignode
-  - tpRigToolkit-tools-rigtoolbox
-  - tpRigToolkit-tools-rigbuilder
-
 
 menu:
   - label: "Rigging"
     type: "menu"
     children:
-      - id: "tpRigToolkit-tools-controlrig"
-        type: "tool"
       - id: "tpRigToolkit-tools-rigtoolbox"
+        type: "tool"
+      - id: "tpRigToolkit-tools-jointorient"
+        type: "tool"
+      - id: "tpRigToolkit-tools-controlrig"
         type: "tool"
