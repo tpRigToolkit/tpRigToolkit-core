@@ -138,7 +138,7 @@ class ControlLineEdit(base.BaseWidget, object):
 
     def _on_open_rig_control_selector(self):
 
-        from tpRigToolkit.tools.controlrig.widgets import controlrig
+        from tpRigToolkit.tools.controlrig.core import controlrig
 
         dlg = QDialog(parent=tp.Dcc.get_main_window() or None)
         dlg.setWindowTitle('Select Control')
@@ -156,9 +156,9 @@ class ControlLineEdit(base.BaseWidget, object):
         # TODO: The project itself should return this path
         controls_path = os.path.join(project_path, 'controls.json')
 
-        control_selector = controlrig.ControlSelector(controls_path=controls_path)
-        if self._control_data:
-            control_selector.set_control_data(self._control_data)
+        control_selector = controlrig.ControlRigToolset(
+            as_selector=True, controls_path=controls_path, control_data=self._control_data, selector_parent=dlg)
+        control_selector.initialize()
         lyt.addWidget(control_selector)
         dlg.resize(600, 700)
         dlg.exec_()
