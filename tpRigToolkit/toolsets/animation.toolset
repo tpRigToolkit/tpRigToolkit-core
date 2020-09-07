@@ -1,0 +1,16 @@
+# Defines tpRigToolkit Animation Tools toolset
+
+sortOrder: -500
+type: animation
+name: Animation
+color: [45, 200, 125]
+hue_shift: 0
+toolsets:
+  - tpRigToolkit-tools-interpolateit
+
+menu:
+  - label: "Animation"
+    type: "menu"
+    children:
+      - id: "tpRigToolkit-tools-interpolateit"
+        type: "tool"
