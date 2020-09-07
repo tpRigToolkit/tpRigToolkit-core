@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Module that contains Skeleton data implementation
+Module that contains Joints data implementation
 """
 
 from __future__ import print_function, division, absolute_import
@@ -18,21 +18,21 @@ import tpRigToolkit
 from tpRigToolkit.core import data as rig_data
 
 
-class SkeletonFileData(data.CustomData, object):
+class JointsFileData(data.CustomData, object):
     def __init__(self, name=None, path=None):
-        super(SkeletonFileData, self).__init__(name=name, path=path)
+        super(JointsFileData, self).__init__(name=name, path=path)
 
     @staticmethod
     def get_data_type():
-        return 'dcc.skeleton'
+        return 'dcc.joints'
 
     @staticmethod
     def get_data_extension():
-        return 'skl'
+        return 'joints'
 
     @staticmethod
     def get_data_title():
-        return 'Skeleton'
+        return 'Joints'
 
     def export_data(self, file_path=None, comment='-', create_version=True, *args, **kwargs):
 
@@ -48,37 +48,18 @@ class SkeletonFileData(data.CustomData, object):
 
         file_folder = os.path.dirname(file_path)
 
-        root_nodes = list()
-        if len(objects) == 1:
-            root_nodes.append(objects[0])
-        else:
-            for object in objects:
-                object_parent = tp.Dcc.node_parent(object, full_path=False)
-                if not object_parent or not tp.Dcc.node_is_joint(object_parent):
-                    root_nodes.append(object_parent)
-        if not root_nodes:
-            tpRigToolkit.logger.warning('No root joints found!')
-            return False
-        if len(root_nodes) > 1:
-            tpRigToolkit.logger.warning(
-                'Multiple root nodes found in skeleton. Only first one will be exported: {}'.format(root_nodes[0]))
-        root_node = root_nodes[0]
-
-        skeleton_data = dict()
-        child_nodes = tp.Dcc.list_children(root_node, children_type='transform')
-        child_nodes.insert(0, root_node)
-
-        skeleton_data['header'] = dict()
-        skeleton_data['data'] = list()
+        joints_data = dict()
+        joints_data['header'] = dict()
+        joints_data['data'] = list()
 
         # store skeleton header
         dcc_name = tp.Dcc.get_name()
-        skeleton_data['header']['dcc'] = dcc_name
-        skeleton_data['header']['up_axis'] = tp.Dcc.get_up_axis_name()
+        joints_data['header']['dcc'] = dcc_name
+        joints_data['header']['up_axis'] = tp.Dcc.get_up_axis_name()
 
-        # store skeleton data
+        # store joints data
         visited_nodes = dict()
-        for i, node in enumerate(child_nodes):
+        for i, node in enumerate(objects):
             node_data = dict()
             node_short_name = tp.Dcc.node_short_name(node, remove_namespace=True)
             node_data['name'] = node_short_name
@@ -107,20 +88,21 @@ class SkeletonFileData(data.CustomData, object):
                 node_namespace = node_namespace[1:]
             node_data['namespace'] = node_namespace
 
-            skeleton_data['data'].append(node_data)
-        if not skeleton_data:
+            joints_data['data'].append(node_data)
+
+        if not joints_data:
             tpRigToolkit.logger.warning('No skeleton data found!')
             return False
-        tpRigToolkit.logger.info('Exporting Skeleton Data: {}'.format(skeleton_data))
+        tpRigToolkit.logger.info('Exporting Skeleton Data: {}'.format(joints_data))
 
         try:
             with open(file_path, 'w') as json_file:
-                json.dump(skeleton_data, json_file, indent=2)
+                json.dump(joints_data, json_file, indent=2)
         except IOError:
-            tpRigToolkit.logger.error('Skeleton data not saved to file {}'.format(file_path))
+            tpRigToolkit.logger.error('Joints data not saved to file {}'.format(file_path))
             return False
 
-        tpRigToolkit.logger.info('Skeleton data exported successfully!')
+        tpRigToolkit.logger.info('Joints data exported successfully!')
 
         version = fileio.FileVersion(file_folder)
         version.save(comment)
@@ -131,21 +113,19 @@ class SkeletonFileData(data.CustomData, object):
 
         file_path = file_path or self.get_file()
         if not file_path or not os.path.isfile(file_path):
-            tpRigToolkit.logger.warning('Impossible to import skeleton data from: "{}"'.format(file_path))
+            tpRigToolkit.logger.warning('Impossible to import joints data from: "{}"'.format(file_path))
             return False
 
         with open(file_path, 'r') as fh:
-            skeleton_data = json.load(fh)
-        if not skeleton_data:
-            tpRigToolkit.logger.warning('No skeleton data found in file: "{}"'.format(file_path))
+            joints_data = json.load(fh)
+        if not joints_data:
+            tpRigToolkit.logger.warning('No joints data found in file: "{}"'.format(file_path))
             return False
 
-        header = skeleton_data.get('header', dict())
-        data = skeleton_data.get('data', dict())
-        if not data:
-            # to support back compatibility
-            data = skeleton_data
+        header = joints_data.get('header', dict())
+        data = joints_data.get('data', dict())
 
+        nodes_list = list()
         created_nodes = dict()
         for node_data in data:
             node_index = node_data.get('index', 0)
@@ -173,6 +153,8 @@ class SkeletonFileData(data.CustomData, object):
 
             if node_type == 'joint':
                 tp.Dcc.zero_orient_joint(new_node)
+
+            nodes_list.append(new_node)
 
         for node_index, node_data in created_nodes.items():
             parent_index = node_data['parent_index']
@@ -202,26 +184,26 @@ class SkeletonFileData(data.CustomData, object):
             if node_namespace:
                 tp.Dcc.assign_node_namespace(node_name, node_namespace, force_create=True)
 
-        return True
+        return nodes_list
 
 
-class SkeletonPreviewWidget(rig_data.DataPreviewWidget, object):
+class JointsPreviewWidget(rig_data.DataPreviewWidget, object):
     def __init__(self, item, parent=None):
-        super(SkeletonPreviewWidget, self).__init__(item=item, parent=parent)
+        super(JointsPreviewWidget, self).__init__(item=item, parent=parent)
 
 
-class Skeleton(rig_data.DataItem, object):
-    Extension = '.{}'.format(SkeletonFileData.get_data_extension())
-    Extensions = ['.{}'.format(SkeletonFileData.get_data_extension())]
+class Joints(rig_data.DataItem, object):
+    Extension = '.{}'.format(JointsFileData.get_data_extension())
+    Extensions = ['.{}'.format(JointsFileData.get_data_extension())]
     MenuOrder = 5
-    MenuName = SkeletonFileData.get_data_title()
-    MenuIconName = 'skeleton.png'
-    TypeIconName = 'skeleton.png'
-    DataType = SkeletonFileData.get_data_type()
-    DefaultDataFileName = 'new_skeleton_file'
-    PreviewWidgetClass = SkeletonPreviewWidget
+    MenuName = JointsFileData.get_data_title()
+    MenuIconName = 'joint.png'
+    TypeIconName = 'joint.png'
+    DataType = JointsFileData.get_data_type()
+    DefaultDataFileName = 'new_joints_file'
+    PreviewWidgetClass = JointsPreviewWidget
 
     def __init__(self, *args, **kwargs):
-        super(Skeleton, self).__init__(*args, **kwargs)
+        super(Joints, self).__init__(*args, **kwargs)
 
-        self.set_data_class(SkeletonFileData)
+        self.set_data_class(JointsFileData)
