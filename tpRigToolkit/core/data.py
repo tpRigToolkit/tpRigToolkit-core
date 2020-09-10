@@ -10,10 +10,11 @@ from __future__ import print_function, division, absolute_import
 import os
 
 from Qt.QtCore import *
-from Qt.QtWidgets import *
 
+import tpDcc as tp
 from tpDcc.libs.python import settings, path as path_utils
 from tpDcc.libs.qt.core import qtutils
+from tpDcc.libs.qt.widgets import buttons
 from tpDcc.libs.qt.widgets.library import manager, items, loadwidget
 
 import tpRigToolkit
@@ -40,17 +41,17 @@ class DataPreviewWidget(loadwidget.LoadWidget, object):
     def ui(self):
         super(DataPreviewWidget, self).ui()
 
-        self._export_btn = QPushButton('Export')
+        self._export_btn = buttons.BaseButton('Export', parent=self)
         self._export_btn.setObjectName('exportButton')
         self._export_btn.setMinimumSize(QSize(60, 35))
         self._export_btn.setMaximumSize(QSize(125, 35))
 
-        self._import_btn = QPushButton('Import')
+        self._import_btn = buttons.BaseButton('Import', parent=self)
         self._import_btn.setObjectName('impotButton')
         self._import_btn.setMinimumSize(QSize(60, 35))
         self._import_btn.setMaximumSize(QSize(125, 35))
 
-        self._reference_btn = QPushButton('Reference')
+        self._reference_btn = buttons.BaseButton('Reference', parent=self)
         self._reference_btn.setObjectName('referenceButton')
         self._reference_btn.setMinimumSize(QSize(60, 35))
         self._reference_btn.setMaximumSize(QSize(125, 35))
@@ -216,7 +217,12 @@ class DataItem(items.BaseItem, object):
                                                                                             data_object_path))
             return
 
-        return self.data_object().import_data(stored_path)
+        objects = tp.Dcc.selected_nodes()
+
+        try:
+            return self.data_object().import_data(stored_path, objects=objects)
+        except TypeError:
+            return self.data_object().import_data(stored_path)
 
     def reference_data(self):
         """
