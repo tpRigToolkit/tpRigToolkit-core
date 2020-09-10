@@ -60,3 +60,25 @@ def copy(source, target, description=''):
         tpRigToolkit.logger.info('Finished copying {} from {} to {}'.format(description, source, target))
         version_file = version.VersionFile(copied_path)
         version_file.save('Copied from {}'.format(source))
+
+
+def get_custom(name, default=''):
+    """
+    Returns custom attributte defined in tpRigToolkit __custom__ module
+    This module can be override by users if necessary
+    :param name: str
+    :param default: str
+    :return: object
+    """
+
+    try:
+        from tpRigToolkit import __custom__
+    except Exception:
+        return default
+
+    value = None
+    exec('value = __custom__.{}'.format(name))
+    if not value:
+        return default
+
+    return value
