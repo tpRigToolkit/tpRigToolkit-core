@@ -104,8 +104,9 @@ class JointsFileData(data.CustomData, object):
 
         tpRigToolkit.logger.info('Joints data exported successfully!')
 
-        version = fileio.FileVersion(file_folder)
-        version.save(comment)
+        version = fileio.FileVersion(file_path)
+        if version.has_versions():
+            version.save(comment)
 
         return True
 
@@ -184,12 +185,20 @@ class JointsFileData(data.CustomData, object):
             if node_namespace:
                 tp.Dcc.assign_node_namespace(node_name, node_namespace, force_create=True)
 
+        tp.Dcc.select_object(nodes_list)
+        tp.Dcc.fit_view()
+        tp.Dcc.clear_selection()
+
         return nodes_list
 
 
 class JointsPreviewWidget(rig_data.DataPreviewWidget, object):
     def __init__(self, item, parent=None):
         super(JointsPreviewWidget, self).__init__(item=item, parent=parent)
+
+        self._export_btn.setText('Save')
+        self._export_btn.setVisible(True)
+        self._load_btn.setVisible(False)
 
 
 class Joints(rig_data.DataItem, object):
