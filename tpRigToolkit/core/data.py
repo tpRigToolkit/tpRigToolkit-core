@@ -84,7 +84,7 @@ class DataPreviewWidget(loadwidget.LoadWidget, object):
 
         self.item().export_data(comment)
 
-        self.update_history()
+        self.refresh()
 
     def import_data(self):
         """
@@ -202,7 +202,7 @@ class DataItem(items.BaseItem, object):
                                                                                             data_object_path))
             return
 
-        return self.data_object().export_data(comment)
+        return self.data_object().export_data(comment=comment)
 
     def import_data(self):
         """
