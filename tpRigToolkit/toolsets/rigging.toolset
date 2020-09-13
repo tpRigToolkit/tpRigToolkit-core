@@ -9,6 +9,7 @@ toolsets:
   - tpRigToolkit-tools-rigtoolbox
   - tpRigToolkit-tools-jointorient
   - tpRigToolkit-tools-controlrig
+  - tpRigToolkit-tools-rigscript
 
 menu:
   - label: "Rigging"
@@ -19,4 +20,6 @@ menu:
       - id: "tpRigToolkit-tools-jointorient"
         type: "tool"
       - id: "tpRigToolkit-tools-controlrig"
+        type: "tool"
+      - id: "tpRigToolkit-tools-rigscript"
         type: "tool"
