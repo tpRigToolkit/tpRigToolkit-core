@@ -215,8 +215,8 @@ class Skeleton(rig_data.DataItem, object):
     Extensions = ['.{}'.format(SkeletonFileData.get_data_extension())]
     MenuOrder = 5
     MenuName = SkeletonFileData.get_data_title()
-    MenuIconName = 'skeleton.png'
-    TypeIconName = 'skeleton.png'
+    MenuIconName = 'skeleton_data.png'
+    TypeIconName = 'skeleton_data.png'
     DataType = SkeletonFileData.get_data_type()
     DefaultDataFileName = 'new_skeleton_file'
     PreviewWidgetClass = SkeletonPreviewWidget

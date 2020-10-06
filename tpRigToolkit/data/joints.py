@@ -82,6 +82,7 @@ class JointsFileData(data.CustomData, object):
             node_data['bone_type'] = tp.Dcc.get_type_labelling(node)
             node_data['bone_other_type'] = tp.Dcc.get_other_type_labelling(node)
             node_data['draw_label'] = tp.Dcc.get_draw_label_labelling(node)
+            node_data['radius'] = tp.Dcc.get_joint_radius(node)
 
             node_namespace = tp.Dcc.node_namespace(node) or ''
             if node_namespace.startswith('|'):
@@ -102,11 +103,11 @@ class JointsFileData(data.CustomData, object):
             tpRigToolkit.logger.error('Joints data not saved to file {}'.format(file_path))
             return False
 
-        tpRigToolkit.logger.info('Joints data exported successfully!')
-
         version = fileio.FileVersion(file_path)
         if version.has_versions():
             version.save(comment)
+
+        tpRigToolkit.logger.info('Joints data exported successfully!')
 
         return True
 
@@ -138,6 +139,7 @@ class JointsFileData(data.CustomData, object):
             node_label_type = node_data.get('bone_type', '')
             node_label_other_type = node_data.get('bone_other_type', '')
             node_label_draw = node_data.get('draw_label', False)
+            node_radius = node_data.get('radius', 1.0)
             node_world_matrix = node_data.get(
                 'world_matrix', [1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0])
             tp.Dcc.clear_selection()
@@ -149,7 +151,7 @@ class JointsFileData(data.CustomData, object):
             created_nodes[node_index] = {
                 'node': new_node, 'parent_index': node_parent_index, 'namespace': node_namespace,
                 'label_side': node_label_side, 'label_type': node_label_type,
-                'label_other_type': node_label_other_type, 'label_draw': node_label_draw
+                'label_other_type': node_label_other_type, 'label_draw': node_label_draw, 'radius': node_radius
             }
 
             if node_type == 'joint':
@@ -159,7 +161,7 @@ class JointsFileData(data.CustomData, object):
 
         for node_index, node_data in created_nodes.items():
             parent_index = node_data['parent_index']
-            if parent_index <= -1:
+            if parent_index < -1:
                 continue
             node_data = created_nodes.get(node_index, None)
             if not node_data:
@@ -170,6 +172,7 @@ class JointsFileData(data.CustomData, object):
             tp.Dcc.set_type_labelling(node_name, node_data.get('label_type'))
             tp.Dcc.set_other_type_labelling(node_name, node_data.get('label_other_type'))
             tp.Dcc.set_draw_label_labelling(node_name, node_data.get('label_draw'))
+            tp.Dcc.set_joint_radius(node_name, node_data.get('radius'))
 
             parent_node_data = created_nodes.get(parent_index, None)
             if not parent_node_data:
@@ -185,7 +188,7 @@ class JointsFileData(data.CustomData, object):
             if node_namespace:
                 tp.Dcc.assign_node_namespace(node_name, node_namespace, force_create=True)
 
-        tp.Dcc.select_object(nodes_list)
+        tp.Dcc.select_node(nodes_list)
         tp.Dcc.fit_view()
         tp.Dcc.clear_selection()
 
@@ -206,8 +209,8 @@ class Joints(rig_data.DataItem, object):
     Extensions = ['.{}'.format(JointsFileData.get_data_extension())]
     MenuOrder = 5
     MenuName = JointsFileData.get_data_title()
-    MenuIconName = 'joint.png'
-    TypeIconName = 'joint.png'
+    MenuIconName = 'joints_data.png'
+    TypeIconName = 'joints_data.png'
     DataType = JointsFileData.get_data_type()
     DefaultDataFileName = 'new_joints_file'
     PreviewWidgetClass = JointsPreviewWidget
