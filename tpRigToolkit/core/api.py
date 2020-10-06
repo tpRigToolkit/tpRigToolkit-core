@@ -227,7 +227,7 @@ def get_mirror_name(current_project, node_name):
     all_sides, default_side = get_sides(current_project=current_project, skip_default=True)
     parsed_name = parse_name(node_name)
     if 'side' not in parsed_name or not parsed_name['side'] or parsed_name['side'] not in all_sides:
-        return tp.Dcc.get_mirror_name(node_name)
+        mirror_name = tp.Dcc.get_mirror_name(node_name)
     else:
         mirror_side = parsed_name['side']
         for side in all_sides:
@@ -235,5 +235,11 @@ def get_mirror_name(current_project, node_name):
                 mirror_side = side
                 break
         parsed_name['side'] = mirror_side
+        mirror_name = solve_name(parse_name)
 
-        return solve_name(parsed_name)
+    if 'Left' in node_name:
+        mirror_name = mirror_name.replace('Left', 'Right')
+    elif 'Right' in node_name:
+        mirror_name = mirror_name.replace('Right', 'Left')
+
+    return mirror_name

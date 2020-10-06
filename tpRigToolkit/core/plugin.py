@@ -8,11 +8,14 @@ Module that contains classes to create editor tools inside Qt apps
 from __future__ import print_function, division, absolute_import
 
 import uuid
+import inspect
 
 from Qt.QtCore import *
 from Qt.QtWidgets import *
 
 import tpDcc
+from tpDcc.libs.python import python
+
 import tpRigToolkit
 
 
@@ -343,7 +346,7 @@ class PluginContextMenuGenerator(object):
             action.triggered.connect(menu_entry_data['callback'])
 
 
-def create_plugin_instance(plugin_class, already_registered_plugins=None):
+def create_plugin_instance(plugin_class, already_registered_plugins=None, **kwargs):
     """
     Creates a tool instance of the given class
     :param plugin_class: cls
@@ -376,4 +379,21 @@ def create_plugin_instance(plugin_class, already_registered_plugins=None):
                 'Plugin {} is not suppported in current software: "{}"'.format(plugin_class.NAME, tp.Dcc.get_name()))
             return None
 
-    return plugin_class()
+    if python.is_python2():
+        plugin_kwargs = inspect.getargspec(plugin_class.__init__)
+        # plugin_kwargs = plugin_kwargs.keywords
+        plugin_kwargs = plugin_kwargs.args
+    else:
+        plugin_kwargs = inspect.signature(plugin_class.__init__)
+        plugin_kwargs = plugin_kwargs.kwargs
+    if not plugin_kwargs:
+        return plugin_class()
+
+    valid_kwargs = dict()
+    for kwarg_name, kwarg_value in kwargs.items():
+        if kwarg_name in plugin_kwargs:
+            valid_kwargs[kwarg_name] = kwarg_value
+    if not valid_kwargs:
+        return plugin_class()
+
+    return plugin_class(**valid_kwargs)
