@@ -219,7 +219,6 @@ class NamingWidget(base.BaseWidget, object):
         self._set_rule(rule=rule)
 
     def _on_open_naming_manager(self):
-        naming_manager_tool = tp.ToolsMgr().launch_tool_by_id(
-            'tpRigToolkit-tools-namemanager', do_reload=True, debug=False, project=self._project)
+        naming_manager_tool = tp.ToolsMgr().launch_tool_by_id('tpRigToolkit-tools-namemanager', project=self._project)
         attacher = naming_manager_tool.attacher
         attacher.closed.connect(self.update_rules)

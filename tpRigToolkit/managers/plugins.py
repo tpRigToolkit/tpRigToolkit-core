@@ -10,7 +10,8 @@ from __future__ import print_function, division, absolute_import
 import tpDcc as tp
 from tpDcc.libs.python import decorators
 
-from tpRigToolkit.core import log, plugin
+import tpRigToolkit
+from tpRigToolkit.core import plugin
 
 
 class PluginsManager(object):
@@ -87,7 +88,7 @@ class PluginsManager(object):
 
         self._plugin_classes.append(plugin_class)
 
-    def invoke_dock_plugin_by_name(self, plugin_name, parent_window=None, settings=None):
+    def invoke_dock_plugin_by_name(self, plugin_name, parent_window=None, settings=None, **kwargs):
         plugin_class = None
         parent_window = parent_window or tp.Dcc.get_main_window()
         for t in self._plugin_classes:
@@ -95,10 +96,10 @@ class PluginsManager(object):
                 plugin_class = t
                 break
         if not plugin_class:
-            log.warning('No registered tool found with name: "{}"'.format(plugin_name))
+            tpRigToolkit.logger.warning('No registered tool found with name: "{}"'.format(plugin_name))
             return None
 
-        tool_instance = plugin.create_plugin_instance(plugin_class, self._plugins)
+        tool_instance = plugin.create_plugin_instance(plugin_class, self._plugins, **kwargs)
         if not tool_instance:
             return None
         if plugin_class.NAME in [t.NAME for t in self._plugins] and plugin_class.IS_SINGLETON:
