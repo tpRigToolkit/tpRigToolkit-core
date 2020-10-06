@@ -10,6 +10,10 @@ toolsets:
   - tpRigToolkit-tools-jointorient
   - tpRigToolkit-tools-controlrig
   - tpRigToolkit-tools-rigscript
+  - tpRigToolkit-tools-spaceswitcher
+  - tpRigToolkit-tools-symmesh
+  - tpRigToolkit-tools-interpolateit
+
 
 menu:
   - label: "Rigging"
@@ -22,4 +26,10 @@ menu:
       - id: "tpRigToolkit-tools-controlrig"
         type: "tool"
       - id: "tpRigToolkit-tools-rigscript"
+        type: "tool"
+      - id: "tpRigToolkit-tools-spaceswitcher"
+        type: "tool"
+      - id: "tpRigToolkit-tools-symmesh"
+        type: "tool"
+      - id: "tpRigToolkit-tools-interpolateit"
         type: "tool"
