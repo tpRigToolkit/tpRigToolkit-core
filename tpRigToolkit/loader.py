@@ -96,6 +96,11 @@ def init_managers(dev=True):
     resources_path = os.path.normpath(os.path.join(os.path.dirname(__file__), 'resources'))
     tpDcc.ResourcesMgr().register_resource(resources_path)
 
+    # Register libraries
+    libs_to_load = core_config.get('libs', list())
+    tpDcc.LibsMgr().register_package_libs(pkg_name=PACKAGE, libs_to_register=libs_to_load, dev=dev)
+    tpDcc.LibsMgr().load_registered_libs(PACKAGE)
+
     # Register tools
     tools_to_load = core_config.get('tools', list())
     tpDcc.ToolsMgr().register_package_tools(pkg_name=PACKAGE, tools_to_register=tools_to_load, dev=dev)
