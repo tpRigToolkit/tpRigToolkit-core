@@ -190,7 +190,7 @@ class RigToolkitNamesManager(object):
         dev = kwargs.get('dev', False)
         use_auto_suffix = kwargs.pop('use_auto_suffix', True)
         node_type = kwargs.get('node_type', None)
-        rule_name = kwargs.pop('rule_name', 'default')
+        rule_name = kwargs.pop('rule_name') or 'default'
 
         if use_auto_suffix and node_type:
             auto_suffixes = tpRigToolkit.NamesMgr().get_auto_suffixes() or dict()
@@ -213,7 +213,7 @@ class RigToolkitNamesManager(object):
             return None
 
         current_rule = name_lib.active_rule()
-        name_lib.set_active_rule(rule_name)
+        name_lib.set_active_rule(rule)
         solved_name = name_lib.solve(*args, **kwargs)
         if current_rule:
             if rule_name != current_rule.name:
