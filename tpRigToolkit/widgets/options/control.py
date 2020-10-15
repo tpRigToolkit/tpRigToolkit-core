@@ -131,7 +131,7 @@ class ControlLineEdit(base.BaseWidget, object):
 
     def set_data(self, data):
         data = data if data is not None else dict()
-        name = data.get('control_name', '')
+        name = data.get('control_type', '')
         self._line.setText(str(name))
         self._line.setToolTip(str(data))
         self._control_data = data
@@ -166,7 +166,7 @@ class ControlLineEdit(base.BaseWidget, object):
         if not control_data and self._control_data:
             return
         if control_data:
-            control_data.pop('shape_data', None)
-            control_data.pop('name', None)
+            control_data.pop('control_name', None)
+            # control_data.pop('control_data', None)
 
         self.controlSelected.emit(control_data)
