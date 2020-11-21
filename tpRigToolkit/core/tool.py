@@ -14,13 +14,11 @@ __email__ = "tpovedatd@gmail.com"
 
 import logging.config
 
-from Qt.QtCore import *
+from Qt.QtCore import Qt
 
 from tpDcc.libs.qt.core import base
 
-import tpRigToolkit.register
-
-LOGGER = logging.getLogger()
+LOGGER = logging.getLogger('tpRigToolkit-core')
 
 
 class ToolAttacher(object):
@@ -85,7 +83,7 @@ class Tool(base.BaseWidget, object):
         if not self._attacher:
             return None
 
-        return self._attacher.settings()
+        return self.attacher.settings()
 
     def save_settings(self):
         """
@@ -123,7 +121,7 @@ class Tool(base.BaseWidget, object):
 
         return self._attacher.add_dock(name=name, **kwargs)
 
-    def add_toolbar(self, name, area=Qt.TopToolBarArea):
+    def add_toolbar(self, name, area=None):
         """
         Adds a new toolbar to the window
         :return:  QToolBar
@@ -134,6 +132,8 @@ class Tool(base.BaseWidget, object):
 
         if not hasattr(self._attacher, 'add_toolbar'):
             return None
+
+        area = area or Qt.TopToolBarArea
 
         return self._attacher.add_toolbar(name=name, area=area)
 
@@ -214,6 +214,3 @@ class Tool(base.BaseWidget, object):
 
         self.unregister_callbacks()
         self.close()
-
-
-tpRigToolkit.register.register_class('Tool', Tool)

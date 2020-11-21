@@ -12,10 +12,11 @@ __license__ = "MIT"
 __maintainer__ = "Tomas Poveda"
 __email__ = "tpovedatd@gmail.com"
 
-import tpDcc
+from tpDcc.dcc import dialog
+from tpDcc.managers import resources
 
 
-class MainDialog(tpDcc.Dialog, object):
+class MainDialog(dialog.Dialog, object):
 
     def __init__(
             self,
@@ -73,4 +74,4 @@ class MainDialog(tpDcc.Dialog, object):
                     '{} Project Icon not found: {}!'.format(
                         self._project.name.title(), self._project.icon_name + '.png'))
 
-        return tpDcc.ResourcesMgr().icon('tpdcc')
+        return resources.icon('tpdcc')

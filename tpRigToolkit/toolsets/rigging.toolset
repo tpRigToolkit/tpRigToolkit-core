@@ -13,6 +13,8 @@ toolsets:
   - tpRigToolkit-tools-spaceswitcher
   - tpRigToolkit-tools-symmesh
   - tpRigToolkit-tools-interpolateit
+  - tpRigToolkit-tools-rignode
+  - tpRigToolkit-tools-animpicker
 
 
 menu:
@@ -32,4 +34,8 @@ menu:
       - id: "tpRigToolkit-tools-symmesh"
         type: "tool"
       - id: "tpRigToolkit-tools-interpolateit"
+        type: "tool"
+      - id: "tpRigToolkit-tools-rignode"
+        type: "tool"
+      - id: "tpRigToolkit-tools-animpicker"
         type: "tool"

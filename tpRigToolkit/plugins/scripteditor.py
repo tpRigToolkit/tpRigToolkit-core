@@ -7,9 +7,10 @@ Module that contains script editor tool implementation
 
 from __future__ import print_function, division, absolute_import
 
-from Qt.QtCore import *
-from Qt.QtWidgets import *
+from Qt.QtCore import Qt
+from Qt.QtWidgets import QSizePolicy, QWidget
 
+from tpDcc.managers import resources
 from tpDcc.libs.qt.widgets import layouts
 from tpDcc.tools.scripteditor.widgets import scripteditor
 
@@ -31,6 +32,10 @@ class ScriptsEditorPlugin(plugin.DockPlugin, object):
         self._content_layout = layouts.VerticalLayout(spacing=0, margins=(0, 0, 0, 0))
         self._content.setLayout(self._content_layout)
         self.setWidget(self._content)
+
+    @staticmethod
+    def icon():
+        return resources.icon('source_code')
 
     def show_plugin(self):
         super(ScriptsEditorPlugin, self).show_plugin()

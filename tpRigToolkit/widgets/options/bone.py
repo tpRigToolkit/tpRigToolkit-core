@@ -10,10 +10,10 @@ from __future__ import print_function, division, absolute_import
 import os
 import json
 
-from Qt.QtCore import *
-from Qt.QtWidgets import *
+from Qt.QtCore import Qt, QFileInfo
+from Qt.QtWidgets import QDialog, QTreeWidget, QTreeWidgetItem
 
-import tpDcc as tp
+from tpDcc import dcc
 from tpDcc.libs.qt.core import base
 from tpDcc.libs.qt.widgets import layouts, lineedit, buttons, dividers
 from tpDcc.libs.qt.widgets.options import option, list, text
@@ -89,11 +89,9 @@ class BoneLineEdit(lineedit.BaseLineEdit, object):
         event.accept()
 
     def _show_bones_hierarchy(self, file_path):
-        dlg = QDialog(parent=tp.Dcc.get_main_window() or None)
+        dlg = QDialog(parent=dcc.get_main_window() or None)
         dlg.setWindowTitle('Select Skeleton Node')
-        lyt = QVBoxLayout()
-        lyt.setSpacing(0)
-        lyt.setContentsMargins(0, 0, 0, 0)
+        lyt = layouts.VerticalLayout(spacing=0, margins=(0, 0, 0, 0))
         dlg.setLayout(lyt)
         bone_hierarchy_widget = BoneHierarchyWidget(file_path, parent=dlg)
         current_bone = self.text() or ''
@@ -122,7 +120,7 @@ class BoneHierarchyWidget(base.BaseWidget, object):
         super(BoneHierarchyWidget, self).ui()
 
         self._tree_hierarchy = QTreeWidget()
-        self._node_line = QLineEdit()
+        self._node_line = lineedit.BaseLineEdit(parent=self)
         self._node_line.setReadOnly(True)
         self._ok_btn = buttons.BaseButton('Ok')
         self._cancel_btn = buttons.BaseButton('Cancel')

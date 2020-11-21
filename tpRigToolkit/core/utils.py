@@ -8,11 +8,12 @@ Module that contains utils functions for tpRigToolkit
 from __future__ import print_function, division, absolute_import
 
 import os
+import logging
 
-import tpDcc as tp
+from tpDcc import dcc
 from tpDcc.libs.python import folder, fileio, version, path as path_utils
 
-import tpRigToolkit
+LOGGER = logging.getLogger('tpRigToolkit-core')
 
 
 def get_data_files_directory():
@@ -24,7 +25,7 @@ def get_data_files_directory():
     data_dirs = [os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data')]
 
     # TODO: Implement a generic way to include data for specific DCCs without add them here explicitly
-    if tp.is_maya():
+    if dcc.is_maya():
         from tpRigToolkit.dccs.maya import data
         data_dirs.append(os.path.join(os.path.dirname(data.__path__[0]), 'data'))
 
@@ -45,7 +46,7 @@ def copy(source, target, description=''):
         copied_path = fileio.copy_file(source, target)
     else:
         if not path_utils.exists(source):
-            tpRigToolkit.logger.info('Nothing to copy: {}\t\tData was probably created but not saved yet.'.format(
+            LOGGER.info('Nothing to copy: {}\t\tData was probably created but not saved yet.'.format(
                 path_utils.get_dirname(is_source_a_file)))
             return
         if path_utils.exists(target):
@@ -53,11 +54,11 @@ def copy(source, target, description=''):
         copied_path = folder.copy_folder(source, target)
 
     if not copied_path:
-        tpRigToolkit.logger.warning('Error copying {}\t to\t{}'.format(source, target))
+        LOGGER.warning('Error copying {}\t to\t{}'.format(source, target))
         return
 
     if copied_path > -1:
-        tpRigToolkit.logger.info('Finished copying {} from {} to {}'.format(description, source, target))
+        LOGGER.info('Finished copying {} from {} to {}'.format(description, source, target))
         version_file = version.VersionFile(copied_path)
         version_file.save('Copied from {}'.format(source))
 

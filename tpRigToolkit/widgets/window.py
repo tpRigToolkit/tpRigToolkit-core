@@ -14,14 +14,14 @@ __email__ = "tpovedatd@gmail.com"
 
 import webbrowser
 
-from Qt.QtCore import *
-from Qt.QtWidgets import *
+from Qt.QtCore import Qt, QSize
+from Qt.QtWidgets import QApplication, QSizePolicy, QWidget, QPushButton, QMainWindow, QToolBar
 
-import tpDcc as tp
-
+from tpDcc import dcc
+from tpDcc.dcc import window
+from tpDcc.managers import resources
 from tpDcc.libs.qt.core import qtutils, statusbar
-
-import tpRigToolkit
+from tpDcc.libs.qt.widgets import layouts
 
 
 class WindowStatusBar(statusbar.StatusWidget, object):
@@ -35,13 +35,13 @@ class WindowStatusBar(statusbar.StatusWidget, object):
         self._info_btn = QPushButton()
         self._info_btn.setIconSize(QSize(25, 25))
         self._info_btn.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
-        self._info_btn.setIcon(tp.ResourcesMgr().icon('info1'))
+        self._info_btn.setIcon(resources.icon('info1'))
         self._info_btn.setStyleSheet('QWidget {background-color: rgba(255, 255, 255, 0); border:0px;}')
 
         self._bug_btn = QPushButton()
         self._bug_btn.setIconSize(QSize(25, 25))
         self._bug_btn.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
-        self._bug_btn.setIcon(tp.ResourcesMgr().icon('bug'))
+        self._bug_btn.setIcon(resources.icon('bug'))
         self._bug_btn.setStyleSheet('QWidget {background-color: rgba(255, 255, 255, 0); border:0px;}')
 
         self.main_layout.insertWidget(0, self._info_btn)
@@ -125,7 +125,7 @@ class WindowStatusBar(statusbar.StatusWidget, object):
         if not self._project:
             return False
 
-        tpRigToolkit.ToolsMgr().run_tool(self._project, 'bugtracker', extra_args={'tool': self._tool})
+        # tools.ToolsManager().run_tool(self._project, 'bugtracker', extra_args={'tool': self._tool})
 
     def _on_open_url(self):
         """
@@ -136,7 +136,7 @@ class WindowStatusBar(statusbar.StatusWidget, object):
         self.open_info_url()
 
 
-class MainWindow(tp.Window, object):
+class MainWindow(window.Window, object):
 
     LOGO_NAME = None
     STATUS_BAR_WIDGET = WindowStatusBar
@@ -191,9 +191,7 @@ class MainWindow(tp.Window, object):
         window_icon = self._get_icon()
         self.setWindowIcon(window_icon)
 
-        title_layout = QHBoxLayout()
-        title_layout.setContentsMargins(0, 0, 0, 0)
-        title_layout.setSpacing(0)
+        title_layout = layouts.HorizontalLayout(spacing=0, margins=(0, 0, 0, 0))
         title_layout.setAlignment(Qt.AlignTop | Qt.AlignHCenter)
         self.main_layout.insertLayout(0, title_layout)
 
@@ -253,7 +251,7 @@ class MainWindow(tp.Window, object):
             self._status_bar.show_info()
 
     def _get_icon(self):
-        return tp.ResourcesMgr().icon('tprigtoolkit')
+        return resources.icon('tprigtoolkit')
 
 
 def dock_window(window_class, min_width=300):
@@ -262,7 +260,7 @@ def dock_window(window_class, min_width=300):
     :param window_class: cls
     """
 
-    if not tp.is_maya():
+    if not dcc.is_maya():
         return
 
     import maya.cmds as cmds

@@ -7,12 +7,12 @@ Module that contains functions to interact with tpRigToolkit
 
 from __future__ import print_function, division, absolute_import
 
-import tpDcc as tp
+from tpDcc import dcc
 from tpDcc.core import project
 from tpDcc.libs.qt.widgets import project
 
-import tpRigToolkit
 from tpRigToolkit.core import consts
+from tpRigToolkit.managers import names
 
 
 def get_project_by_name(projects_path, project_name, project_class):
@@ -47,7 +47,7 @@ def solve_name(*args, **kwargs):
 
     kwargs['unique_name'] = kwargs.get('unique_name', True)
 
-    solved_name = tpRigToolkit.NamesMgr().solve_name(*args, **kwargs)
+    solved_name = names.solve_name(*args, **kwargs)
 
     return solved_name
 
@@ -60,7 +60,7 @@ def parse_name(node_name, rule_name=None):
     :return: dict(str)
     """
 
-    return tpRigToolkit.NamesMgr().parse_name(node_name=node_name, rule_name=rule_name)
+    return names.parse_name(node_name=node_name, rule_name=rule_name)
 
 
 def get_sides(current_project, skip_default=False, default_sides=None, default_side=None):
@@ -103,6 +103,7 @@ def get_side_long_name(short_side, current_project=None):
     """
     Returns full version of the given side
     :param short_side: str
+    :param current_project: Project
     :return: str
     """
 
@@ -194,7 +195,7 @@ def get_color_of_side(current_project, side, sub_color=False):
             if side_color:
                 break
 
-    return side_color if side_color else tp.Dcc.get_color_of_side(side=side, sub_color=sub_color)
+    return side_color if side_color else dcc.get_color_of_side(side=side, sub_color=sub_color)
 
 
 def get_side_colors(current_project, sides=None, sub_color=False):
@@ -227,7 +228,7 @@ def get_mirror_name(current_project, node_name):
     all_sides, default_side = get_sides(current_project=current_project, skip_default=True)
     parsed_name = parse_name(node_name)
     if 'side' not in parsed_name or not parsed_name['side'] or parsed_name['side'] not in all_sides:
-        mirror_name = tp.Dcc.get_mirror_name(node_name)
+        mirror_name = dcc.get_mirror_name(node_name)
     else:
         mirror_side = parsed_name['side']
         for side in all_sides:

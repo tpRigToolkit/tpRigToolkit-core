@@ -7,7 +7,7 @@ Module that contains options to link bones/joints with controls
 
 from __future__ import print_function, division, absolute_import
 
-from Qt.QtCore import *
+from Qt.QtCore import Qt, Signal
 
 from tpDcc.libs.qt.core import base
 from tpDcc.libs.qt.widgets import layouts, buttons

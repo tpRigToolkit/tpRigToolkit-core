@@ -7,10 +7,13 @@ color: [45, 200, 125]
 hue_shift: 0
 toolsets:
   - tpRigToolkit-tools-interpolateit
+  - tpRigToolkit-tools-animpicker
 
 menu:
   - label: "Animation"
     type: "menu"
     children:
       - id: "tpRigToolkit-tools-interpolateit"
+        type: "tool"
+      - id: "tpRigToolkit-tools-animpicker"
         type: "tool"

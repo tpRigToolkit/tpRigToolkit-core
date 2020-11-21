@@ -9,14 +9,17 @@ from __future__ import print_function, division, absolute_import
 
 import uuid
 import inspect
+import logging
 
-from Qt.QtCore import *
-from Qt.QtWidgets import *
+from Qt.QtCore import Qt, Signal, QSize, QEvent
+from Qt.QtWidgets import QWidget, QDockWidget, QGroupBox, QLabel, QLineEdit, QToolButton, QMenu
 
-import tpDcc
+from tpDcc import dcc
+from tpDcc.managers import resources
 from tpDcc.libs.python import python
+from tpDcc.libs.qt.widgets import layouts
 
-import tpRigToolkit
+LOGGER = logging.getLogger('tpRigToolkit-core')
 
 
 class BasePlugin(object):
@@ -68,7 +71,7 @@ class BasePlugin(object):
         :return: QIcon or None
         """
 
-        return None
+        return resources.icon('tpRigToolkit')
 
     def unique_name(self):
         """
@@ -125,7 +128,7 @@ class ShelfPlugin(BasePlugin, object):
 
     @staticmethod
     def icon():
-        return tpDcc.ResourcesMgr().icon('home')
+        return resources.icon('home')
 
     def context_menu_builder(self):
         return None
@@ -152,6 +155,7 @@ class DockPlugin(QDockWidget, BasePlugin):
         self.setObjectName(self.unique_name())
         self.setTitleBarWidget(DockTitleBar(self))
         self.setFloating(False)
+        self.setWindowIcon(self.icon())
 
     def restore_state(self, settings):
         super(DockPlugin, self).restore_state(settings)
@@ -164,8 +168,10 @@ class DockPlugin(QDockWidget, BasePlugin):
         :param event: QEvent
         """
 
+        from tpRigToolkit.managers import plugins
+
         self.close_plugin()
-        tpRigToolkit.PluginsMgr().unregister_plugin_instance(self)
+        plugins.unregister_plugin_instance(self)
         self.closed.emit(self)
         event.accept()
 
@@ -188,18 +194,16 @@ class DockTitleBar(QWidget, object):
 
         self._renamable = renamable
 
-        main_layout = QHBoxLayout()
-        main_layout.setContentsMargins(0, 0, 0, 1)
+        main_layout = layouts.HorizontalLayout(margins=(0, 0, 0, 1))
         self.setLayout(main_layout)
 
         self._buttons_box = QGroupBox('')
         self._buttons_box.setObjectName('Docked')
-        self._buttons_layout = QHBoxLayout()
-        self._buttons_layout.setSpacing(1)
-        self._buttons_layout.setMargin(2)
+        self._buttons_layout = layouts.HorizontalLayout(spacing=1, margins=(2, 2, 2, 2))
         self._buttons_box.setLayout(self._buttons_layout)
         main_layout.addWidget(self._buttons_box)
 
+        self._icon_label = QLabel(self)
         self._title_label = QLabel(self)
         self._title_label.setStyleSheet('background: transparent')
         self._title_edit = QLineEdit(self)
@@ -208,15 +212,16 @@ class DockTitleBar(QWidget, object):
         self._button_size = QSize(14, 14)
 
         self._dock_btn = QToolButton(self)
-        self._dock_btn.setIcon(tpDcc.ResourcesMgr().icon('restore_window', theme='color'))
+        self._dock_btn.setIcon(resources.icon('restore_window', theme='color'))
         self._dock_btn.setMaximumSize(self._button_size)
         self._dock_btn.setAutoRaise(True)
         self._close_btn = QToolButton(self)
-        self._close_btn.setIcon(tpDcc.ResourcesMgr().icon('close_window', theme='color'))
+        self._close_btn.setIcon(resources.icon('close_window', theme='color'))
         self._close_btn.setMaximumSize(self._button_size)
         self._close_btn.setAutoRaise(True)
 
         self._buttons_layout.addSpacing(2)
+        self._buttons_layout.addWidget(self._icon_label)
         self._buttons_layout.addWidget(self._title_label)
         self._buttons_layout.addWidget(self._title_edit)
         self._buttons_layout.addStretch()
@@ -238,6 +243,9 @@ class DockTitleBar(QWidget, object):
         self.set_title(dock_widget.windowTitle())
         dock_widget.installEventFilter(self)
         dock_widget.topLevelChanged.connect(self._on_change_floating_style)
+
+        if hasattr(dock_widget, 'icon') and callable(dock_widget.icon):
+            self._icon_label.setPixmap(dock_widget.icon().pixmap(QSize(16, 16)))
 
     @property
     def renamable(self):
@@ -354,8 +362,6 @@ def create_plugin_instance(plugin_class, already_registered_plugins=None, **kwar
     :return:
     """
 
-    import tpDcc as tp
-
     if already_registered_plugins is None:
         already_registered_plugins = list()
 
@@ -374,9 +380,9 @@ def create_plugin_instance(plugin_class, already_registered_plugins=None, **kwar
 
     supported_softwares = plugin_class.SUPPORTED_SOFTWARES
     if 'any' not in supported_softwares:
-        if tp.Dcc.get_name() not in supported_softwares:
-            tpDcc.logger.warning(
-                'Plugin {} is not suppported in current software: "{}"'.format(plugin_class.NAME, tp.Dcc.get_name()))
+        if dcc.get_name() not in supported_softwares:
+            LOGGER.warning(
+                'Plugin {} is not suppported in current software: "{}"'.format(plugin_class.NAME, dcc.get_name()))
             return None
 
     if python.is_python2():

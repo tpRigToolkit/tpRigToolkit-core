@@ -7,16 +7,19 @@ Module that contains project widgets implementation for tpRigToolkit
 
 from __future__ import print_function, division, absolute_import
 
-from Qt.QtCore import *
-from Qt.QtWidgets import *
-from Qt.QtGui import *
+import logging
 
-import tpDcc as tp
+from Qt.QtCore import Qt, Signal, QSize
+from Qt.QtWidgets import QSizePolicy, QLabel
+from Qt.QtGui import QPixmap
+
+from tpDcc.managers import resources, tools
 from tpDcc.libs.qt.core import base
-from tpDcc.libs.qt.widgets import dividers, buttons
+from tpDcc.libs.qt.widgets import layouts, dividers, buttons, combobox
 
-import tpRigToolkit
 from tpRigToolkit.widgets.options import rigoptionsviewer
+
+LOGGER = logging.getLogger('tpRigToolkit-core')
 
 
 class ProjectSettingsWidget(base.BaseWidget, object):
@@ -32,15 +35,15 @@ class ProjectSettingsWidget(base.BaseWidget, object):
     def ui(self):
         super(ProjectSettingsWidget, self).ui()
 
-        image_layout = QHBoxLayout()
+        image_layout = layouts.HorizontalLayout(spacing=2, margins=(2, 2, 2, 2))
         image_layout.setContentsMargins(2, 2, 2, 2)
         image_layout.setSpacing(2)
         self.main_layout.addLayout(image_layout)
         self._project_image = QLabel()
         self._project_image.setAlignment(Qt.AlignCenter)
-        image_layout.addItem(QSpacerItem(30, 0, QSizePolicy.Expanding, QSizePolicy.Fixed))
+        image_layout.addStretch()
         image_layout.addWidget(self._project_image)
-        image_layout.addItem(QSpacerItem(30, 0, QSizePolicy.Expanding, QSizePolicy.Fixed))
+        image_layout.addStretch()
 
         self.main_layout.addWidget(dividers.Divider('Nomenclature'))
         self._naming_widget = NamingWidget(project=self._project)
@@ -51,26 +54,20 @@ class ProjectSettingsWidget(base.BaseWidget, object):
         self.main_layout.addWidget(self._project_options_widget)
         self.main_layout.addWidget(dividers.Divider())
 
-        bottom_layout = QVBoxLayout()
-        bottom_layout.setContentsMargins(2, 2, 2, 2)
-        bottom_layout.setSpacing(2)
+        bottom_layout = layouts.VerticalLayout(spacing=2, margins=(2, 2, 2, 2))
         bottom_layout.setAlignment(Qt.AlignBottom)
         self.main_layout.addLayout(bottom_layout)
         bottom_layout.addLayout(dividers.DividerLayout())
 
-        buttons_layout = QHBoxLayout()
-        buttons_layout.setContentsMargins(2, 2, 2, 2)
-        buttons_layout.setSpacing(2)
+        buttons_layout = layouts.HorizontalLayout(spacing=2, margins=(2, 2, 2,2))
         bottom_layout.addLayout(buttons_layout)
 
-        ok_icon = tp.ResourcesMgr().icon('ok')
-        back_icon = tp.ResourcesMgr().icon('back')
-        self._ok_btn = buttons.StyleBaseButton(
-            icon=ok_icon, icon_padding=2, parent=self, button_style=buttons.ButtonStyles.FlatStyle)
-        self._ok_btn.setMinimumSize(QSize(35, 35))
-        self._back_btn = buttons.StyleBaseButton(
-            icon=back_icon, icon_padding=2, parent=self, button_style=buttons.ButtonStyles.FlatStyle)
-        self._back_btn.setMaximumWidth(50)
+        ok_icon = resources.icon('ok')
+        back_icon = resources.icon('back')
+        self._ok_btn = buttons.BaseButton(parent=self)
+        self._ok_btn.setIcon(ok_icon)
+        self._back_btn = buttons.BaseButton(parent=self)
+        self._back_btn.setIcon(back_icon)
         buttons_layout.addWidget(self._ok_btn)
         buttons_layout.addWidget(self._back_btn)
 
@@ -138,20 +135,19 @@ class NamingWidget(base.BaseWidget, object):
         self.update_rules()
 
     def get_main_layout(self):
-        main_layout = QHBoxLayout()
-        main_layout.setContentsMargins(0, 0, 0, 0)
-        main_layout.setSpacing(2)
+        main_layout = layouts.HorizontalLayout(spacing=2, margins=(0, 0, 0, 0))
 
         return main_layout
 
     def ui(self):
         super(NamingWidget, self).ui()
 
-        edit_icon = tp.ResourcesMgr().icon('edit')
+        edit_icon = resources.icon('edit')
         name_lbl = QLabel('Naming Rule: ')
-        self._name_rules = QComboBox()
+        self._name_rules = combobox.BaseComboBox(parent=self)
         self._name_rules.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
-        self._edit_btn = buttons.IconButton(icon=edit_icon, icon_padding=2, button_style=buttons.ButtonStyles.FlatStyle)
+        self._edit_btn = buttons.BaseButton(parent=self)
+        self._edit_btn.setIcon(edit_icon)
         self.main_layout.addWidget(name_lbl)
         self.main_layout.addWidget(self._name_rules)
         self.main_layout.addWidget(dividers.get_horizontal_separator_widget())
@@ -183,7 +179,7 @@ class NamingWidget(base.BaseWidget, object):
             rule_name = self._set_rule()
             self._name_rules.setCurrentText(rule_name)
         except Exception as exc:
-            tpRigToolkit.logger.warning('Error while updating rules: {}'.format(exc))
+            LOGGER.warning('Error while updating rules: {}'.format(exc))
         finally:
             self._name_rules.blockSignals(False)
 
@@ -219,6 +215,7 @@ class NamingWidget(base.BaseWidget, object):
         self._set_rule(rule=rule)
 
     def _on_open_naming_manager(self):
-        naming_manager_tool = tp.ToolsMgr().launch_tool_by_id('tpRigToolkit-tools-namemanager', project=self._project)
+        naming_manager_tool = tools.ToolsManager().launch_tool_by_id(
+            'tpRigToolkit-tools-namemanager', project=self._project)
         attacher = naming_manager_tool.attacher
         attacher.closed.connect(self.update_rules)

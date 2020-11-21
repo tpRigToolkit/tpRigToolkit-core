@@ -8,16 +8,19 @@ Module that contains core data widgets for tpRigToolkit
 from __future__ import print_function, division, absolute_import
 
 import os
+import logging
 
-from Qt.QtCore import *
+from Qt.QtCore import QSize
 
-import tpDcc as tp
+from tpDcc import dcc
 from tpDcc.libs.python import settings, path as path_utils
 from tpDcc.libs.qt.core import qtutils
 from tpDcc.libs.qt.widgets import buttons
 from tpDcc.libs.qt.widgets.library import manager, items, loadwidget
 
-import tpRigToolkit
+# from tpRigToolkit.managers import data
+
+LOGGER = logging.getLogger('tpRigToolkit-core')
 
 
 class DataFolder(manager.LibraryDataFolder, object):
@@ -31,7 +34,9 @@ class DataFolder(manager.LibraryDataFolder, object):
         :return: LibraryManager
         """
 
-        return tpRigToolkit.DataMgr()
+        from tpRigToolkit.managers import data
+
+        return data.DataManager()
 
 
 class DataPreviewWidget(loadwidget.LoadWidget, object):
@@ -217,7 +222,7 @@ class DataItem(items.BaseItem, object):
                                                                                             data_object_path))
             return
 
-        objects = tp.Dcc.selected_nodes()
+        objects = dcc.selected_nodes()
 
         try:
             return self.data_object().import_data(stored_path, objects=objects)
@@ -255,7 +260,7 @@ class DataItem(items.BaseItem, object):
 
         if hasattr(class_name, 'get_data_extension()'):
             if class_name.Extension != '.{}'.format(class_name.get_data_extension()):
-                tpRigToolkit.logger.error(
+                LOGGER.error(
                     'Data class {} (.{}) has not the same extension as the data item: {} ({})'.format(
                         class_name, class_name.get_data_extension(), self, self.Extension))
                 return

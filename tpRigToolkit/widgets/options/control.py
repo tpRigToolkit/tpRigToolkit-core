@@ -9,10 +9,11 @@ from __future__ import print_function, division, absolute_import
 
 import os
 
-from Qt.QtCore import *
-from Qt.QtWidgets import *
 
-import tpDcc as tp
+from Qt.QtCore import Qt, Signal
+from Qt.QtWidgets import QDialog
+
+from tpDcc import dcc
 from tpDcc.libs.qt.core import base
 from tpDcc.libs.qt.widgets import layouts, label, lineedit, buttons
 
@@ -140,9 +141,9 @@ class ControlLineEdit(base.BaseWidget, object):
 
         from tpRigToolkit.tools.controlrig.core import controlrig
 
-        dlg = QDialog(parent=tp.Dcc.get_main_window() or None)
+        dlg = QDialog(parent=dcc.get_main_window() or None)
         dlg.setWindowTitle('Select Control')
-        lyt = QVBoxLayout()
+        lyt = layouts.VerticalLayout(spacing=0, margins=(0, 0, 0, 0))
         lyt.setSpacing(0)
         lyt.setContentsMargins(0, 0, 0, 0)
         dlg.setLayout(lyt)

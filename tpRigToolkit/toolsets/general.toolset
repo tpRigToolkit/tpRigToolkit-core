@@ -1,0 +1,16 @@
+# Defines tpRigToolkit Animation Tools toolset
+
+sortOrder: -100
+type: general
+name: General
+color: [133, 48, 25]
+hue_shift: 0
+toolsets:
+  - tpDcc-tools-datalibrary
+
+menu:
+  - label: "General"
+    type: "menu"
+    children:
+      - id: "tpDcc-tools-datalibrary"
+        type: "tool"

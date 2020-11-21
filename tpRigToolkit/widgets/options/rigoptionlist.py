@@ -9,10 +9,10 @@ from __future__ import print_function, division, absolute_import
 
 from functools import partial
 
-from Qt.QtCore import *
-from Qt.QtWidgets import *
+from Qt.QtCore import Qt, Signal
+from Qt.QtWidgets import QSizePolicy, QAction
 
-import tpDcc as tp
+from tpDcc.managers import resources
 from tpDcc.libs.python import name as name_utils
 from tpDcc.libs.qt.core import qtutils
 from tpDcc.libs.qt.widgets import layouts
@@ -23,7 +23,7 @@ from tpRigToolkit.widgets.options import factory
 
 class RigOptionList(optionlist.OptionList, object):
 
-    FACTORY_CLASS = factory.RigOptionsFactorySingleton
+    FACTORY_CLASS = factory
 
     def __init__(self, parent=None, option_object=None):
         self._menu_added = False
@@ -38,9 +38,9 @@ class RigOptionList(optionlist.OptionList, object):
         if self._menu_added:
             return create_menu
 
-        control_icon = tp.ResourcesMgr().icon('rigcontrol')
-        bone_icon = tp.ResourcesMgr().icon('bone')
-        link_icon = tp.ResourcesMgr().icon('link')
+        control_icon = resources.icon('rigcontrol')
+        bone_icon = resources.icon('bone')
+        link_icon = resources.icon('link')
 
         create_menu.addSeparator()
         add_rig_control_action = QAction(control_icon, 'Add Rig Control', create_menu)

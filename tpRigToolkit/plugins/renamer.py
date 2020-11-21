@@ -7,10 +7,10 @@ Module that contains renamer tool implementation
 
 from __future__ import print_function, division, absolute_import
 
-from Qt.QtCore import *
-from Qt.QtWidgets import *
+from Qt.QtCore import Qt
+from Qt.QtWidgets import QSizePolicy, QWidget
 
-import tpDcc
+from tpDcc.managers import configs, resources
 from tpDcc.libs.qt.widgets import layouts
 from tpDcc.tools.renamer.core import renamer
 
@@ -33,15 +33,19 @@ class RenamerPlugin(plugin.DockPlugin, object):
         self._content.setLayout(self._content_layout)
         self.setWidget(self._content)
 
+    @staticmethod
+    def icon():
+        return resources.icon('rename')
+
     def show_plugin(self):
         super(RenamerPlugin, self).show_plugin()
 
         # TODO: This should be defined
         dev = False
 
-        names_config = tpDcc.ConfigsMgr().get_config(
+        names_config = configs.get_config(
             config_name='tpRigToolkit-names', environment='development' if dev else 'production')
-        naming_config = tpDcc.ConfigsMgr().get_config(
+        naming_config = configs.get_config(
             config_name='tpRigToolkit-naming', environment='development' if dev else 'production')
 
         self._renamer_widget = renamer.RenamerToolsetWidget(
